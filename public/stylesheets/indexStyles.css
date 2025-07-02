@@ -1,0 +1,24 @@
+section {
+    display: flex;
+    gap: 10px;
+    width: 90%;
+}
+
+.Categories {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.productGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.productGrid span {
+    width: 30%;
+    height: auto;
+    border: 1px solid black;
+}
