@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/formStyles.css' />
+</head>
+
+<body>
+
+    <main>
+
+        <h1>
+            <%= title %>
+        </h1>
+        <hr>
+        <form action="">
+            <label for="mail">Correo electronico</label>
+            <input type="email" name="" id="mail" required>
+            <label for="pass">Contraseña</label>
+            <input type="password" name="" id="pass" required>
+
+            <span class="rememberBox">
+                <input type="checkbox" name="" id="remember">
+                <label for="remember">Recordarme</label>
+
+            </span>
+
+            <button class="blackButton" style="padding: 10px; width: 150px; margin: 0 auto;">Acceder</button>
+
+            <a class="forgot">¿Olvidaste tu contraseña?</a>
+        </form>
+        <hr style="margin: 50px 0px; border: 1px solid rgb(175, 175, 175);">
+        <div class="logOptions">
+            <button><img src="./svg/facebook.svg" alt=""></button>
+            <button><img src="./svg/google.svg" alt=""></button>
+            <button><img src="./svg/apple.svg" alt=""></button>
+        </div>
+
+    </main>
+
+</body>
+
+</html>
