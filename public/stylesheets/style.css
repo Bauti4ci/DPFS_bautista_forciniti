@@ -18,11 +18,26 @@ nav {
   align-content: center;
   padding: 5px;
   height: 20px;
+  font-size: 20px;
 }
 
 nav div {
   display: flex;
   align-items: center;
   align-content: center;
-  gap: 5px;
+  gap: 15px;
+}
+
+.searchBar {
+  background-color: lightgray;
+  border: 0px solid;
+  border-radius: 25px;
+  padding: 3px;
+}
+
+.searchBar input {
+  border: none;
+  color: black;
+  background-color: lightgray;
+  border-radius: 25px;
 }
