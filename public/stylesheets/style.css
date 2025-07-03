@@ -1,6 +1,8 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to top, lightgrey, rgba(211, 211, 211, 0));
+
 }
 
 a {
@@ -16,8 +18,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  padding: 5px;
-  height: 20px;
+  height: 50px;
   font-size: 20px;
 }
 
@@ -26,18 +27,54 @@ nav div {
   align-items: center;
   align-content: center;
   gap: 15px;
+  height: 50px;
 }
 
 .searchBar {
-  background-color: lightgray;
+  display: flex;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.9);
   border: 0px solid;
   border-radius: 25px;
-  padding: 3px;
+  justify-content: center;
+  height: 60%;
+  max-height: 40px;
+  padding: 5px;
+  align-content: center;
+  align-items: center;
 }
 
 .searchBar input {
   border: none;
-  color: black;
-  background-color: lightgray;
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
   border-radius: 25px;
+  height: 100%;
+  font-size: 18px;
+}
+
+.searchBar input:focus {
+  outline: none;
+}
+
+.searchBar img {
+  margin-left: 10px;
+  width: 20px;
+  height: auto;
+}
+
+.cart {
+  width: auto;
+  height: 80%;
+}
+
+.blackButton {
+  background-color: black;
+  color: white;
+  font-size: 18px;
+  padding: 6px;
+  border: 0px solid;
+  border-radius: 35px;
+  height: 80%;
+
 }

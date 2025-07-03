@@ -13,8 +13,8 @@
 }
 
 .alternativePhotos img {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border: solid 1px gray;
     justify-content: center;
     align-items: center;
@@ -23,8 +23,8 @@
 }
 
 .productImage {
-    width: 600px;
-    height: 500px;
+    width: 535px;
+    height: 664px;
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -36,10 +36,14 @@
 .firstDetails {
     margin-left: 40px;
     width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 h1 {
     font-size: 40px;
+    margin: 0;
 }
 
 h3 {
@@ -51,18 +55,57 @@ h2 {
     font-size: 32px;
 }
 
+.productNaming {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.colours {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 40px;
+}
+
+.colours img {
+    width: 70px;
+    height: 70px;
+    border: solid 1px gray;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.sizes {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 40px;
+}
+
+.sizes img {
+    width: 65px;
+    height: 45px;
+    border: solid 1px gray;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
 .buyOptions {
     display: flex;
     flex-direction: column;
-    width: 225px;
+    width: 280px;
     background-color: lightgrey;
     gap: 15px;
-    padding: 15px;
+    padding: 8px;
     border-radius: 20px;
 }
 
 .buyOptions button {
     background-color: black;
+    border: 0px solid;
     color: white;
     height: 40px;
     font-size: 18px;

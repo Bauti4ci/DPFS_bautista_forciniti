@@ -1,24 +1,68 @@
+h1 {
+    font-size: 45px;
+    font-weight: 700;
+    margin-top: 100px;
+}
+
+.bio {
+    font-size: 17px;
+    max-width: 700px;
+}
+
+h2 {
+    margin-top: 60px;
+}
+
 section {
     display: flex;
-    gap: 10px;
-    width: 90%;
+    gap: 40px;
+    width: 100%;
+    margin-top: 30px;
 }
 
 .Categories {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 12px;
+    width: 10%;
+}
+
+.Categories button {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    align-items: center;
+    align-content: center;
+    border: 0px solid;
+    border-radius: 25px;
+    background-color: black;
+    color: white;
 }
 
 .productGrid {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    width: 100%;
+    gap: 5px;
+    width: 90%;
 }
 
 .productGrid span {
-    width: 30%;
+    width: 32%;
     height: auto;
+    max-height: 460px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.productGrid span p {
+    margin: 2px;
+}
+
+.productGrid span img {
+    height: auto;
+    min-height: 400px;
+    width: max-content;
+    min-width: 400px;
     border: 1px solid black;
 }
