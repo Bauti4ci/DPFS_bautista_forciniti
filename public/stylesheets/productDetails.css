@@ -86,25 +86,39 @@ h2 {
     margin-bottom: 40px;
 }
 
-.sizes img {
+.sizes div {
     width: 65px;
     height: 45px;
-    border: solid 1px gray;
+    /*     border: solid 1px gray;
+ */
     border-radius: 5px;
     justify-content: center;
     align-items: center;
     align-content: center;
     text-align: center;
+    backdrop-filter: blur(12px) saturate(185%);
+    -webkit-backdrop-filter: blur(12px) saturate(185%);
+    background-color: rgba(17, 25, 40, 0.05);
+    /*     border-radius: 18px;
+ */
+    border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .buyOptions {
     display: flex;
     flex-direction: column;
     width: 280px;
-    background-color: lightgrey;
+    /*  background-color: lightgrey; */
     gap: 15px;
     padding: 8px;
-    border-radius: 20px;
+    /* border-radius: 20px;
+ */
+
+    backdrop-filter: blur(12px) saturate(185%);
+    -webkit-backdrop-filter: blur(12px) saturate(185%);
+    background-color: rgba(17, 25, 40, 0.05);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .buyOptions button {

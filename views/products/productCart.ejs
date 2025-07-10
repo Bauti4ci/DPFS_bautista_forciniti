@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/cartStyles.css' />
+</head>
+
+<body>
+
+    <main>
+
+        <%- include('../partials/header.ejs') %>
+
+            <h1>
+                <%= title %>: 2
+            </h1>
+
+            <section>
+                <div class="cartList">
+                    <span>
+                        <img src="" alt="Producto" class="cartProductImage">
+                        <div>
+                            <h3>Nombre</h3>
+                            <h4>$00.000,00</h4>
+                            <p>Descripcion breve del producto</p>
+                        </div>
+                        <img src="/svg/x.svg" alt="x" class="deleteP">
+                    </span>
+                    <span>
+                        <img src="" alt="Producto" class="cartProductImage">
+                        <div>
+                            <h3>Nombre</h3>
+                            <h4>$00.000,00</h4>
+                            <p>Descripcion breve del producto</p>
+                        </div>
+                        <img src="/svg/x.svg" alt="x" class="deleteP">
+                    </span>
+                </div>
+                <div class="payment">
+                    <span>
+                        <h4>Total:</h4>
+                        <p>00.000,00</p>
+                    </span>
+                    <hr>
+                    <span>
+                        <h5>Metodo de pago</h5>
+                        <p>+ Agregar Metodo</p>
+                    </span>
+                    <hr>
+                    <span style="margin-top: 30px; justify-content: center;">
+                        <button class="blackButton" style="padding: 10px 15px; height: 40px; width: 80%;">Confirmar
+                            compra</button>
+                    </span>
+                </div>
+            </section>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+
+</html>
