@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/create&editStyles.css' />
+</head>
+
+<body>
+
+    <main>
+
+        <%- include('../partials/header.ejs') %>
+
+            <h1>
+                <%= title %>
+            </h1>
+
+            <section>
+                <form action="/product/edit/<%= product.id %>" method="POST" enctype="multipart/form-data">
+
+                    <span class="createSpan">
+                        <label for="id">Id del producto a editar</label>
+                        <input type="text" name="id" id="id" class="acrilico" style="text-align: center;"
+                            value="<%= product.id %>" readonly required>
+                    </span>
+                    <br>
+
+                    <span class="createSpan">
+                        <p style="margin-bottom: 5px; font-weight: bold;">Imagen Actual:</p>
+                        <img src="<%= product.image %>" alt="Imagen de <%= product.name %>" width="150"
+                            style="margin-bottom: 10px; border-radius: 4px; border: 1px solid #ddd;">
+                        <br>
+                        <label for="image">Subir Imagenes</label>
+                        <input type="file" id="image" name="image" class="imageUpload acrilico"
+                            accept="image/png, image/jpeg" multiple>
+                    </span>
+
+                    <div class="createForm">
+                        <div>
+                            <span class="createSpan">
+                                <label for="name">Nombre</label>
+                                <input type="text" name="name" id="name" class="acrilico" value="<%= product.name %>"
+                                    required>
+                            </span>
+
+                            <span class="createSpan">
+                                <label for="categorie">Categoria</label>
+                                <select name="categorie" id="categorie" class="acrilico" required>
+                                    <option value="ropa" <%=product.category==='ropa' ? 'selected' : '' %>>Indumetaria
+                                    </option>
+                                    <option value="zapatillas" <%=product.category==='zapatillas' ? 'selected' : '' %>
+                                        >Zapatillas</option>
+                                    <option value="suplementos" <%=product.category==='suplementos' ? 'selected' : '' %>
+                                        >Suplementos</option>
+                                    <option value="snacks" <%=product.category==='snacks' ? 'selected' : '' %>>Snacks
+                                    </option>
+                                    <option value="equipo" <%=product.category==='equipo' ? 'selected' : '' %>>Equipo
+                                    </option>
+                                </select>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="createSpan">
+                                <label for="precio">Precio</label>
+                                <input type="number" name="precio" class="acrilico" id="precio"
+                                    value="<%= product.price %>" required>
+                            </span>
+
+                            <span class="createSpan">
+                                <label for="gender">Genero</label>
+                                <select name="gender" id="gender" class="acrilico">
+                                    <option value="" <% !product.gender ? 'selected' : '' %>>Sin Género</option>
+
+                                    <option value="both" <%=(product.gender && product.gender.includes('Masculino') &&
+                                        product.gender.includes('Femenino')) ? 'selected' : '' %>>Ambos</option>
+
+                                    <option value="Masculino" <%=(product.gender && product.gender.includes('Masculino')
+                                        && product.gender.length===1) ? 'selected' : '' %>>Masculino</option>
+
+                                    <option value="Femenino" <%=(product.gender && product.gender.includes('Femenino')
+                                        && product.gender.length===1) ? 'selected' : '' %>>Femenino</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <span class="createSpan">
+                            <label for="color">Color</label>
+                            <input type="text" name="color" class="acrilico" id="color" value="<%= product.color %>">
+                        </span>
+
+                        <span class="createSpan">
+                            <label for="bio">Descripción</label>
+                            <textarea name="bio" id="bio" class="acrilico"
+                                required><%= product.description %></textarea>
+                        </span>
+                    </div>
+
+                    <p class="checkboxTittle hidden" id="titTalles">Talles</p>
+                    <p class="checkboxTittle hidden" id="titTamaño">Tamaño</p>
+                    <p class="checkboxTittle hidden" id="titPeso">Peso</p>
+
+                    <div class="checkboxList hidden" id="cbl">
+                        <input type="checkbox" name="xs" id="xs" <%=(product.wearSize &&
+                            product.wearSize.includes('XS')) ? 'checked' : '' %>> <label for="xs">XS</label>
+                        <input type="checkbox" name="s" id="s" <%=(product.wearSize && product.wearSize.includes('S'))
+                            ? 'checked' : '' %>> <label for="s">S</label>
+                        <input type="checkbox" name="m" id="m" <%=(product.wearSize && product.wearSize.includes('M'))
+                            ? 'checked' : '' %>> <label for="m">M</label>
+                        <input type="checkbox" name="l" id="l" <%=(product.wearSize && product.wearSize.includes('L'))
+                            ? 'checked' : '' %>> <label for="l">L</label>
+                        <input type="checkbox" name="xl" id="xl" <%=(product.wearSize &&
+                            product.wearSize.includes('XL')) ? 'checked' : '' %>> <label for="xl">XL</label>
+                        <input type="checkbox" name="xxl" id="xxl" <%=(product.wearSize &&
+                            product.wearSize.includes('XXL')) ? 'checked' : '' %>> <label for="xxl">XXL</label>
+                    </div>
+
+                    <div class="checkboxList hidden" id="cbl2">
+                        <span><input type="checkbox" name="s35" id="s35" <%=(product.footSize &&
+                                product.footSize.includes(35)) ? 'checked' : '' %>> <label for="s35">35</label></span>
+                        <span><input type="checkbox" name="s36" id="s36" <%=(product.footSize &&
+                                product.footSize.includes(36)) ? 'checked' : '' %>> <label for="s36">36</label></span>
+                        <span><input type="checkbox" name="s37" id="s37" <%=(product.footSize &&
+                                product.footSize.includes(37)) ? 'checked' : '' %>> <label for="s37">37</label></span>
+                        <span><input type="checkbox" name="s38" id="s38" <%=(product.footSize &&
+                                product.footSize.includes(38)) ? 'checked' : '' %>> <label for="s38">38</label></span>
+                        <span><input type="checkbox" name="s39" id="s39" <%=(product.footSize &&
+                                product.footSize.includes(39)) ? 'checked' : '' %>> <label for="s39">39</label></span>
+                        <span><input type="checkbox" name="s40" id="s40" <%=(product.footSize &&
+                                product.footSize.includes(40)) ? 'checked' : '' %>> <label for="s40">40</label></span>
+                        <span><input type="checkbox" name="s41" id="s41" <%=(product.footSize &&
+                                product.footSize.includes(41)) ? 'checked' : '' %>> <label for="s41">41</label></span>
+                        <span><input type="checkbox" name="s42" id="s42" <%=(product.footSize &&
+                                product.footSize.includes(42)) ? 'checked' : '' %>> <label for="s42">42</label></span>
+                        <span><input type="checkbox" name="s43" id="s43" <%=(product.footSize &&
+                                product.footSize.includes(43)) ? 'checked' : '' %>> <label for="s43">43</label></span>
+                        <span><input type="checkbox" name="s44" id="s44" <%=(product.footSize &&
+                                product.footSize.includes(44)) ? 'checked' : '' %>> <label for="s44">44</label></span>
+                        <span><input type="checkbox" name="s45" id="s45" <%=(product.footSize &&
+                                product.footSize.includes(45)) ? 'checked' : '' %>> <label for="s45">45</label></span>
+                    </div>
+
+                    <div class="checkboxList hidden" id="cbl3">
+                        <span><input type="checkbox" name="150gr" id="150gr" <%=(product.size &&
+                                product.size.includes('150gr')) ? 'checked' : '' %>> <label
+                                for="150gr">150gr</label></span>
+                        <span><input type="checkbox" name="200gr" id="200gr" <%=(product.size &&
+                                product.size.includes('200gr')) ? 'checked' : '' %>> <label
+                                for="200gr">200gr</label></span>
+                        <span><input type="checkbox" name="250gr" id="250gr" <%=(product.size &&
+                                product.size.includes('250gr')) ? 'checked' : '' %>> <label
+                                for="250gr">250gr</label></span>
+                        <span><input type="checkbox" name="300gr" id="300gr" <%=(product.size &&
+                                product.size.includes('300gr')) ? 'checked' : '' %>> <label
+                                for="300gr">300gr</label></span>
+                        <span><input type="checkbox" name="400gr" id="400gr" <%=(product.size &&
+                                product.size.includes('400gr')) ? 'checked' : '' %>> <label
+                                for="400gr">400gr</label></span>
+                        <span><input type="checkbox" name="500gr" id="500gr" <%=(product.size &&
+                                product.size.includes('500gr')) ? 'checked' : '' %>> <label
+                                for="500gr">500gr</label></span>
+                        <span><input type="checkbox" name="600gr" id="600gr" <%=(product.size &&
+                                product.size.includes('600gr')) ? 'checked' : '' %>> <label
+                                for="600gr">600gr</label></span>
+                        <span><input type="checkbox" name="700gr" id="700gr" <%=(product.size &&
+                                product.size.includes('700gr')) ? 'checked' : '' %>> <label
+                                for="700gr">700gr</label></span>
+                        <span><input type="checkbox" name="800gr" id="800gr" <%=(product.size &&
+                                product.size.includes('800gr')) ? 'checked' : '' %>> <label
+                                for="800gr">800gr</label></span>
+                        <span><input type="checkbox" name="900gr" id="900gr" <%=(product.size &&
+                                product.size.includes('900gr')) ? 'checked' : '' %>> <label
+                                for="900gr">900gr</label></span>
+                        <span><input type="checkbox" name="1kg" id="1kg" <%=(product.size &&
+                                product.size.includes('1kg')) ? 'checked' : '' %>> <label for="1kg">1kg</label></span>
+                        <span><input type="checkbox" name="2kg" id="2kg" <%=(product.size &&
+                                product.size.includes('2kg')) ? 'checked' : '' %>> <label for="2kg">2kg</label></span>
+                        <span><input type="checkbox" name="3kg" id="3kg" <%=(product.size &&
+                                product.size.includes('3kg')) ? 'checked' : '' %>> <label for="3kg">3kg</label></span>
+                    </div>
+
+                    <div class="checkboxList hidden" id="cbl4">
+                        <span><input type="checkbox" name="1kg" id="1kg-weight" <%=(product.weight &&
+                                product.weight.includes('1kg')) ? 'checked' : '' %>> <label
+                                for="1kg-weight">1kg</label></span>
+                        <span><input type="checkbox" name="1.25kg" id="1.25kg" <%=(product.weight &&
+                                product.weight.includes('1.25kg')) ? 'checked' : '' %>> <label
+                                for="1.25kg">1.25kg</label></span>
+                        <span><input type="checkbox" name="2kg" id="2kg-weight" <%=(product.weight &&
+                                product.weight.includes('2kg')) ? 'checked' : '' %>> <label
+                                for="2kg-weight">2kg</label></span>
+                        <span><input type="checkbox" name="2.5kg" id="2.5kg" <%=(product.weight &&
+                                product.weight.includes('2.5kg')) ? 'checked' : '' %>> <label
+                                for="2.5kg">2.5kg</label></span>
+                        <span><input type="checkbox" name="3kg" id="3kg-weight" <%=(product.weight &&
+                                product.weight.includes('3kg')) ? 'checked' : '' %>> <label
+                                for="3kg-weight">3kg</label></span>
+                        <span><input type="checkbox" name="4kg" id="4kg" <%=(product.weight &&
+                                product.weight.includes('4kg')) ? 'checked' : '' %>> <label for="4kg">4kg</label></span>
+                        <span><input type="checkbox" name="5kg" id="5kg" <%=(product.weight &&
+                                product.weight.includes('5kg')) ? 'checked' : '' %>> <label for="5kg">5kg</label></span>
+                        <span><input type="checkbox" name="6kg" id="6kg" <%=(product.weight &&
+                                product.weight.includes('6kg')) ? 'checked' : '' %>> <label for="6kg">6kg</label></span>
+                        <span><input type="checkbox" name="7kg" id="7kg" <%=(product.weight &&
+                                product.weight.includes('7kg')) ? 'checked' : '' %>> <label for="7kg">7kg</label></span>
+                        <span><input type="checkbox" name="8kg" id="8kg" <%=(product.weight &&
+                                product.weight.includes('8kg')) ? 'checked' : '' %>> <label for="8kg">8kg</label></span>
+                        <span><input type="checkbox" name="9kg" id="9kg" <%=(product.weight &&
+                                product.weight.includes('9kg')) ? 'checked' : '' %>> <label for="9kg">9kg</label></span>
+                        <span><input type="checkbox" name="10kg" id="10kg" <%=(product.weight &&
+                                product.weight.includes('10kg')) ? 'checked' : '' %>> <label
+                                for="10kg">10kg</label></span>
+                        <span><input type="checkbox" name="12kg" id="12kg" <%=(product.weight &&
+                                product.weight.includes('12kg')) ? 'checked' : '' %>> <label
+                                for="12kg">12kg</label></span>
+                        <span><input type="checkbox" name="14kg" id="14kg" <%=(product.weight &&
+                                product.weight.includes('14kg')) ? 'checked' : '' %>> <label
+                                for="14kg">14kg</label></span>
+                        <span><input type="checkbox" name="16kg" id="16kg" <%=(product.weight &&
+                                product.weight.includes('16kg')) ? 'checked' : '' %>> <label
+                                for="16kg">16kg</label></span>
+                        <span><input type="checkbox" name="18kg" id="18kg" <%=(product.weight &&
+                                product.weight.includes('18kg')) ? 'checked' : '' %>> <label
+                                for="18kg">18kg</label></span>
+                        <span><input type="checkbox" name="20kg" id="20kg" <%=(product.weight &&
+                                product.weight.includes('20kg')) ? 'checked' : '' %>> <label
+                                for="20kg">20kg</label></span>
+                        <span><input type="checkbox" name="22kg" id="22kg" <%=(product.weight &&
+                                product.weight.includes('22kg')) ? 'checked' : '' %>> <label
+                                for="22kg">22kg</label></span>
+                        <span><input type="checkbox" name="24kg" id="24kg" <%=(product.weight &&
+                                product.weight.includes('24kg')) ? 'checked' : '' %>> <label
+                                for="24kg">24kg</label></span>
+                        <span><input type="checkbox" name="26kg" id="26kg" <%=(product.weight &&
+                                product.weight.includes('26kg')) ? 'checked' : '' %>> <label
+                                for="26kg">26kg</label></span>
+                        <span><input type="checkbox" name="28kg" id="28kg" <%=(product.weight &&
+                                product.weight.includes('28kg')) ? 'checked' : '' %>> <label
+                                for="28kg">28kg</label></span>
+                        <span><input type="checkbox" name="30kg" id="30kg" <%=(product.weight &&
+                                product.weight.includes('30kg')) ? 'checked' : '' %>> <label
+                                for="30kg">30kg</label></span>
+                        <span><input type="checkbox" name="32kg" id="32kg" <%=(product.weight &&
+                                product.weight.includes('32kg')) ? 'checked' : '' %>> <label
+                                for="32kg">32kg</label></span>
+                        <span><input type="checkbox" name="34kg" id="34kg" <%=(product.weight &&
+                                product.weight.includes('34kg')) ? 'checked' : '' %>> <label
+                                for="34kg">34kg</label></span>
+                        <span><input type="checkbox" name="36kg" id="36kg" <%=(product.weight &&
+                                product.weight.includes('36kg')) ? 'checked' : '' %>> <label
+                                for="36kg">36kg</label></span>
+                        <span><input type="checkbox" name="38kg" id="38kg" <%=(product.weight &&
+                                product.weight.includes('38kg')) ? 'checked' : '' %>> <label
+                                for="38kg">38kg</label></span>
+                        <span><input type="checkbox" name="40kg" id="40kg" <%=(product.weight &&
+                                product.weight.includes('40kg')) ? 'checked' : '' %>> <label
+                                for="40kg">40kg</label></span>
+                    </div>
+
+                    <div class="submitButtonDiv">
+                        <button class="blackButton acrilico">Terminar</button>
+                    </div>
+                </form>
+            </section>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+</body>
+
+<script src="/scripts/createForm.js"></script>
+
+</html>

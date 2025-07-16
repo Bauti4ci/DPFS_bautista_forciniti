@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html>
 
 <head>
     <title>
-        PRODUCTO TONTITO
+        <%= title %>
     </title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/productDetails.css' />
@@ -15,7 +14,7 @@
 
             <section class="principal">
 
-                <div class="alternativePhotos">
+                <!--   <div class="alternativePhotos">
                     <img src="" alt="foto 1">
                     <img src="" alt="foto 2">
                     <img src="" alt="foto 3">
@@ -26,40 +25,101 @@
                     <img src="" alt="foto 8">
                     <img src="" alt="foto 9">
                     <img src="" alt="foto 10">
-                </div>
+                </div> -->
 
-                <img src="" alt="Imagen principal" class="productImage">
+                <img src="<%= product.image  %>" alt="<%= product.name  %>" class="productImage">
 
                 <div class="firstDetails">
 
                     <span class="productNaming">
-                        <h1>Producto</h1>
-                        <h3>Descripcion cortita del producto</h3>
+                        <h1>
+                            <%= product.name %>
+                        </h1>
+                        <h3>
+                            <%= product.description %>
+                        </h3>
                     </span>
 
-                    <h2>$000,99</h2>
+                    <% if (product.gender) { %>
+                        <!--                         <p style="font-size: 18px; font-weight: 600;">Género</p>
+ -->
+                        <span class="sizes">
+                            <% product.gender.forEach(gender=> { %>
+                                <div>
+                                    <%= gender %>
+                                </div>
+                                <% }) %>
+                        </span>
+                        <% } %>
 
-                    <span class="colours">
-                        <img src="" alt="C1">
-                        <img src="" alt="C2">
-                        <img src="" alt="C3">
-                        <img src="" alt="C4">
-                    </span>
 
-                    <p style="font-size: 18px; font-weight: 600;">Talles</p>
+                            <h2>
+                                $<%= product.price %>
+                            </h2>
 
-                    <span class="sizes">
-                        <div>S</div>
-                        <div>M</div>
-                        <div>L</div>
-                        <div>XL</div>
-                        <div>XS</div>
-                    </span>
 
-                    <span class="buyOptions">
-                        <button>Comprar</button>
-                        <button>Agregar al carrito</button>
-                    </span>
+
+                            <% if (product.color) { %>
+                                <span>
+                                    <p style="font-size: 18px; font-weight: 600;">Color</p>
+                                    <p>
+                                        <%= product.color %>
+                                    </p>
+                                </span>
+                                <% } %>
+
+
+
+                                    <% if (product.wearSize) { %>
+                                        <p style="font-size: 18px; font-weight: 600;">Talles</p>
+                                        <span class="sizes">
+                                            <% product.wearSize.forEach(size=> { %>
+                                                <div>
+                                                    <%= size %>
+                                                </div>
+                                                <% }) %>
+                                        </span>
+                                        <% } %>
+
+                                            <% if (product.size) { %>
+                                                <p style="font-size: 18px; font-weight: 600;">Tamaños</p>
+                                                <span class="sizes">
+                                                    <% product.size.forEach(size=> { %>
+                                                        <div>
+                                                            <%= size %>
+                                                        </div>
+                                                        <% }) %>
+                                                </span>
+                                                <% } %>
+
+                                                    <% if (product.footSize) { %>
+                                                        <p style="font-size: 18px; font-weight: 600;">Talles</p>
+                                                        <span class="sizes">
+                                                            <% product.footSize.forEach(size=> { %>
+                                                                <div>
+                                                                    <%= size %>
+                                                                </div>
+                                                                <% }) %>
+                                                        </span>
+                                                        <% } %>
+
+                                                            <% if (product.weight) { %>
+                                                                <p style="font-size: 18px; font-weight: 600;">Peso</p>
+                                                                <span class="sizes">
+                                                                    <% product.weight.forEach(weight=> { %>
+                                                                        <div>
+                                                                            <%= weight %>
+                                                                        </div>
+                                                                        <% }) %>
+                                                                </span>
+                                                                <% } %>
+
+
+
+                                                                    <span class="buyOptions darkGlass">
+                                                                        <button>Comprar</button>
+                                                                        <button>Agregar al carrito</button>
+                                                                    </span>
 
                 </div>
 
@@ -67,6 +127,9 @@
 
     </main>
     <%- include('../partials/footer.ejs') %>
+</body>
+
+</html>
 </body>
 
 </html>

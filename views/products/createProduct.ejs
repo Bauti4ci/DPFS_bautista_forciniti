@@ -20,11 +20,11 @@
             </h1>
 
             <section>
-                <form>
+                <form action="/product/new" method="post" enctype="multipart/form-data">
                     <span class="createSpan">
                         <label for="image">Subir Imagenes</label>
                         <input type="file" id="image" name="image" class="imageUpload" accept="image/png, image/jpeg"
-                            multiple required>
+                            required multiple>
                     </span>
                     <div class="createForm">
                         <div>
@@ -50,13 +50,19 @@
                             </span>
                             <span class="createSpan">
                                 <label for="gender">Genero</label>
-                                <select name="geneder" id="gender">
-                                    <option value="male">Masculino</option>
-                                    <option value="female">Femenino</option>
+                                <select name="gender" id="gender">
+                                    <option value="" selected>Sin Género</option>
+                                    <option value="male">Hombre</option>
+                                    <option value="female">Mujer</option>
+                                    <option value="both">Ambos</option>
                                 </select>
                             </span>
                         </div>
 
+                        <span class="createSpan">
+                            <label for="color">Color</label>
+                            <input type="text" name="color" id="color" required>
+                        </span>
                         <span class="createSpan">
                             <label for="bio">Descripción</label>
                             <textarea name="bio" id="bio" required></textarea>
@@ -131,7 +137,7 @@
                         <span><input type="checkbox" name="40kg" id="40kg"><label for="40kg">40kg</label></span>
                     </div>
                     <div class=" submitButtonDiv">
-                        <button class="blackButton">Crear</button>
+                        <button class="blackButton darkGlass">Crear</button>
                     </div>
                 </form>
             </section>

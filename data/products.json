@@ -1,0 +1,630 @@
+[
+    {
+        "id": 1,
+        "name": "Proteína Whey Gold Standard",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Proteína",
+        "price": 87000,
+        "category": "suplementos",
+        "description": "La proteína en polvo más premiada, ideal para la recuperación muscular.",
+        "color": "",
+        "size": [
+            "200gr",
+            "300gr",
+            "600gr",
+            "900gr",
+            "2kg"
+        ],
+        "footSize": null,
+        "weight": null,
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 2,
+        "name": "Barra de Proteína Quest",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Snack",
+        "price": 25000,
+        "category": "snacks",
+        "description": "Snack alto en proteínas y bajo en carbohidratos, perfecto para después de entrenar.",
+        "color": null,
+        "size": [
+            "Caja de 6",
+            "Caja de 12"
+        ],
+        "footSize": null,
+        "weight": null,
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 3,
+        "name": "Galletas de Avena y Pasas",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Snack",
+        "price": 8500,
+        "category": "snacks",
+        "description": "Galletas energéticas con fibra, ideales para un impulso rápido de energía.",
+        "color": null,
+        "size": [
+            "150gr",
+            "300gr"
+        ],
+        "footSize": null,
+        "weight": null,
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 4,
+        "name": "Remera de Entrenamiento Dry-Fit",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Ropa",
+        "price": 45000,
+        "category": "ropa",
+        "description": "Remera ligera con tecnología que absorbe el sudor para mantenerte seco.",
+        "color": "Verde",
+        "size": null,
+        "footSize": null,
+        "weight": null,
+        "wearSize": [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL"
+        ],
+        "gender": [
+            "Hombre"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Calzas Deportivas Adidas",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Ropa",
+        "price": 65000,
+        "category": "ropa",
+        "description": "Calzas de compresión que ofrecen soporte y libertad de movimiento.",
+        "color": "Verde",
+        "size": null,
+        "footSize": null,
+        "weight": null,
+        "wearSize": [
+            "XS",
+            "S",
+            "M",
+            "L"
+        ],
+        "gender": [
+            "Mujer"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Creatina Monohidratada ENA",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Creatina",
+        "price": 28000,
+        "category": "suplementos",
+        "description": "Suplemento para mejorar la fuerza y el rendimiento en entrenamientos de alta intensidad.",
+        "color": null,
+        "size": [
+            "300gr",
+            "500gr",
+            "1kg"
+        ],
+        "footSize": null,
+        "weight": null,
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 7,
+        "name": "Mix de Frutos Secos",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Snack",
+        "price": 12000,
+        "category": "snacks",
+        "description": "Combinación de nueces, almendras y pasas para un snack saludable.",
+        "color": null,
+        "size": [
+            "250gr",
+            "500gr",
+            "1kg"
+        ],
+        "footSize": null,
+        "weight": null,
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 8,
+        "name": "Zapatillas de Running Nike",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Zapatillas",
+        "price": 180000,
+        "category": "zapatillas",
+        "description": "Diseñadas para corredores que buscan velocidad, amortiguación y comodidad.",
+        "color": "Carmesí",
+        "size": null,
+        "footSize": [
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45
+        ],
+        "weight": null,
+        "wearSize": null,
+        "gender": [
+            "Hombre",
+            "Mujer"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Disco Olímpico",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Equipo",
+        "price": 95000,
+        "category": "equipo",
+        "description": "Disco de hierro fundido con revestimiento de caucho para mayor durabilidad.",
+        "color": "Negro",
+        "size": null,
+        "footSize": null,
+        "weight": [
+            "1.25kg",
+            "2.50kg",
+            "5kg",
+            "10kg",
+            "20kg"
+        ],
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 10,
+        "name": "Buzo con Capucha",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Ropa",
+        "price": 75000,
+        "category": "ropa",
+        "description": "Buzo de algodón frisado, perfecto para el abrigo antes y después de entrenar.",
+        "color": "Granate",
+        "size": null,
+        "footSize": null,
+        "weight": null,
+        "wearSize": [
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "gender": [
+            "Hombre"
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Pre-entreno C4",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Pre-entreno",
+        "price": 35000,
+        "category": "suplementos",
+        "description": "Fórmula explosiva para maximizar la energía, el enfoque y la resistencia.",
+        "color": null,
+        "size": [
+            "250gr",
+            "400gr"
+        ],
+        "footSize": null,
+        "weight": null,
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 12,
+        "name": "Zapatillas de Crossfit Reebok",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Zapatillas",
+        "price": 195000,
+        "category": "zapatillas",
+        "description": "Calzado estable y duradero, diseñado para los entrenamientos más exigentes.",
+        "color": "Dorado",
+        "size": null,
+        "footSize": [
+            37,
+            38,
+            39,
+            40,
+            41,
+            42
+        ],
+        "weight": null,
+        "wearSize": null,
+        "gender": [
+            "Hombre",
+            "Mujer"
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Mancuerna Hexagonal",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Equipo",
+        "price": 72000,
+        "category": "equipo",
+        "description": "Mancuerna recubierta en caucho para un agarre seguro y protección del suelo.",
+        "color": "Negro",
+        "size": null,
+        "footSize": null,
+        "weight": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20,
+            22,
+            24,
+            26,
+            28,
+            30,
+            32,
+            34,
+            36,
+            38,
+            40
+        ],
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 14,
+        "name": "Shorts de Fútbol",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Ropa",
+        "price": 38000,
+        "category": "ropa",
+        "description": "Pantalón corto y ligero, ideal para deportes de equipo y entrenamientos.",
+        "color": "Naranja",
+        "size": null,
+        "footSize": null,
+        "weight": null,
+        "wearSize": [
+            "S",
+            "M",
+            "L"
+        ],
+        "gender": [
+            "Hombre"
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Cinturón de Levantamiento",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Equipo",
+        "price": 55000,
+        "category": "equipo",
+        "description": "Ofrece soporte lumbar y abdominal para levantamientos pesados y seguros.",
+        "color": "Negro",
+        "size": null,
+        "footSize": null,
+        "weight": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ],
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 16,
+        "name": "Musculosa Deportiva",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Ropa",
+        "price": 32000,
+        "category": "ropa",
+        "description": "Máxima libertad de movimiento y ventilación para los días más intensos.",
+        "color": "Azul",
+        "size": null,
+        "footSize": null,
+        "weight": null,
+        "wearSize": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "gender": [
+            "Hombre",
+            "Mujer"
+        ]
+    },
+    {
+        "id": 17,
+        "name": "Zapatillas de Trekking Salomon",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Zapatillas",
+        "price": 210000,
+        "category": "zapatillas",
+        "description": "Calzado robusto con agarre superior para aventuras en la montaña.",
+        "color": "Pardo",
+        "size": null,
+        "footSize": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45
+        ],
+        "weight": null,
+        "wearSize": null,
+        "gender": [
+            "Hombre"
+        ]
+    },
+    {
+        "id": 18,
+        "name": "Barra Olímpica",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Equipo",
+        "price": 250000,
+        "category": "equipo",
+        "description": "Barra estándar para levantamiento de pesas, fabricada en acero de alta resistencia.",
+        "color": "Metálico",
+        "size": null,
+        "footSize": null,
+        "weight": [
+            "20kg"
+        ],
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 19,
+        "name": "Campera Rompevientos",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Ropa",
+        "price": 89000,
+        "category": "ropa",
+        "description": "Campera ultraligera que protege del viento y la llovizna.",
+        "color": "Violeta",
+        "size": null,
+        "footSize": null,
+        "weight": null,
+        "wearSize": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL"
+        ],
+        "gender": [
+            "Mujer"
+        ]
+    },
+    {
+        "id": 20,
+        "name": "Zapatillas Urbanas Puma",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Zapatillas",
+        "price": 155000,
+        "category": "zapatillas",
+        "description": "Estilo clásico y comodidad para el uso diario con un toque deportivo.",
+        "color": "Púrpura",
+        "size": null,
+        "footSize": [
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42
+        ],
+        "weight": null,
+        "wearSize": null,
+        "gender": [
+            "Mujer"
+        ]
+    },
+    {
+        "id": 21,
+        "name": "Zapatillas de Vóley Asics",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Zapatillas",
+        "price": 175000,
+        "category": "zapatillas",
+        "description": "Suela de gran agarre y amortiguación para saltos y movimientos laterales.",
+        "color": "Azul",
+        "size": null,
+        "footSize": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44
+        ],
+        "weight": null,
+        "wearSize": null,
+        "gender": [
+            "Hombre",
+            "Mujer"
+        ]
+    },
+    {
+        "id": 22,
+        "name": "Top Deportivo Mujer",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Ropa",
+        "price": 35000,
+        "category": "ropa",
+        "description": "Soporte medio y tela transpirable para mayor comodidad en tus entrenamientos.",
+        "color": "Rosa",
+        "size": null,
+        "footSize": null,
+        "weight": null,
+        "wearSize": [
+            "XS",
+            "S",
+            "M",
+            "L"
+        ],
+        "gender": [
+            "Mujer"
+        ]
+    },
+    {
+        "id": 23,
+        "name": "Kettlebell / Pesa Rusa",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Equipo",
+        "price": 68000,
+        "category": "equipo",
+        "description": "Pesa rusa de hierro fundido, ideal para entrenamiento funcional y de fuerza.",
+        "color": "Negro",
+        "size": null,
+        "footSize": null,
+        "weight": [
+            "8kg",
+            "12kg",
+            "16kg",
+            "20kg"
+        ],
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 24,
+        "name": "BCAA en Polvo",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Suplemento",
+        "price": 42000,
+        "category": "suplementos",
+        "description": "Aminoácidos de cadena ramificada para reducir la fatiga y acelerar la recuperación.",
+        "color": null,
+        "size": [
+            "250gr",
+            "500gr"
+        ],
+        "footSize": null,
+        "weight": null,
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 25,
+        "name": "Gomitas Energéticas",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Snack",
+        "price": 18000,
+        "category": "snacks",
+        "description": "Gomitas con carbohidratos de rápida absorción para energía instantánea.",
+        "color": null,
+        "size": [
+            "Caja de 10",
+            "Caja de 20"
+        ],
+        "footSize": null,
+        "weight": null,
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 26,
+        "name": "Medias Deportivas (Pack x3)",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Ropa",
+        "price": 22000,
+        "category": "ropa",
+        "description": "Pack de tres pares de medias con soporte en el arco y talón reforzado.",
+        "color": "Blanco",
+        "size": null,
+        "footSize": null,
+        "weight": null,
+        "wearSize": [
+            "M",
+            "L",
+            "XL"
+        ],
+        "gender": [
+            "Hombre",
+            "Mujer"
+        ]
+    },
+    {
+        "id": 27,
+        "name": "Zapatillas de Básquet Jordan",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Zapatillas",
+        "price": 250000,
+        "category": "zapatillas",
+        "description": "Diseño icónico con soporte en el tobillo y tracción superior para la cancha.",
+        "color": "Rojo",
+        "size": null,
+        "footSize": [
+            40,
+            41,
+            42,
+            43,
+            44,
+            45
+        ],
+        "weight": null,
+        "wearSize": null,
+        "gender": [
+            "Hombre"
+        ]
+    },
+    {
+        "id": 28,
+        "name": "Soga para Saltar de Velocidad",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Equipo",
+        "price": 29000,
+        "category": "equipo",
+        "description": "Soga de acero recubierta con mangos de aluminio y rulemanes para alta velocidad.",
+        "color": "Metálico",
+        "size": null,
+        "footSize": null,
+        "weight": null,
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 29,
+        "name": "Quemador de Grasa (Fat Burner)",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Suplemento",
+        "price": 48000,
+        "category": "suplementos",
+        "description": "Fórmula termogénica para ayudar a la oxidación de grasas y aumentar el metabolismo.",
+        "color": null,
+        "size": [
+            "60 cápsulas",
+            "120 cápsulas"
+        ],
+        "footSize": null,
+        "weight": null,
+        "wearSize": null,
+        "gender": null
+    },
+    {
+        "id": 30,
+        "name": "Gorra Trucker",
+        "image": "https://placehold.co/535x665/ffffff/000000?text=Ropa",
+        "price": 26000,
+        "category": "ropa",
+        "description": "Gorra con panel frontal de espuma y malla trasera para ventilación.",
+        "color": "Negro",
+        "size": null,
+        "footSize": null,
+        "weight": null,
+        "wearSize": [
+            "Talle Único"
+        ],
+        "gender": [
+            "Hombre",
+            "Mujer"
+        ]
+    }
+]

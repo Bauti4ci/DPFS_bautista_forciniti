@@ -1,74 +1,26 @@
-h1 {
-    font-size: 45px;
-    font-weight: 700;
-    margin-top: 100px;
+section {
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    max-width: 50%;
+    text-align: center;
 }
 
-.bio {
-    font-size: 17px;
-    max-width: 700px;
+h1 {
+    font-size: 80px;
 }
 
 h2 {
-    margin-top: 60px;
+    font-size: 45px
 }
 
-section {
-    display: flex;
-    gap: 40px;
-    width: 100%;
-    margin-top: 30px;
+p {
+    font-size: 24px;
 }
 
-.Categories {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 10%;
-    padding: 15px;
-    backdrop-filter: blur(12px) saturate(185%);
-    -webkit-backdrop-filter: blur(12px) saturate(185%);
-    background-color: rgba(17, 25, 40, 0.05);
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.125);
-    height: min-content;
-}
-
-.Categories button {
-    display: flex;
-    justify-content: center;
-    gap: 3px;
-    align-items: center;
-    align-content: center;
-    border: 0px solid;
-    border-radius: 25px;
-    background-color: black;
-    color: white;
-}
-
-.productGrid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    width: 90%;
-}
-
-.productGrid span {
-    width: 32%;
-    height: auto;
-    max-height: 460px;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 40px;
-}
-
-.productGrid span p {
-    margin: 2px;
-}
-
-.productGrid span img {
-    height: 400px;
-    width: 400px;
-    border: 0px solid black;
-    overflow: hidden;
+a {
+    font-size: 20px;
+    color: black;
 }
