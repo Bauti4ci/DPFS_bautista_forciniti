@@ -626,5 +626,26 @@
             "Hombre",
             "Mujer"
         ]
+    },
+    {
+        "id": 31,
+        "name": "Mancuernas",
+        "image": "/productsImages/image-1752679238286-288954469.jpg",
+        "price": 18000,
+        "category": "equipo",
+        "description": "Macuernas profesionales en diferentes tamñanos y pesos",
+        "color": "Negro",
+        "size": null,
+        "footSize": null,
+        "weight": [
+            "2.5kg",
+            "6kg",
+            "10kg",
+            "16kg",
+            "20kg",
+            "26kg"
+        ],
+        "wearSize": null,
+        "gender": null
     }
 ]

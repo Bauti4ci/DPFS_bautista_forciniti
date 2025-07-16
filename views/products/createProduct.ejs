@@ -23,18 +23,18 @@
                 <form action="/product/new" method="post" enctype="multipart/form-data">
                     <span class="createSpan">
                         <label for="image">Subir Imagenes</label>
-                        <input type="file" id="image" name="image" class="imageUpload" accept="image/png, image/jpeg"
-                            required multiple>
+                        <input type="file" id="image" name="image" class="imageUpload acrilico"
+                            accept="image/png, image/jpeg" required multiple>
                     </span>
                     <div class="createForm">
                         <div>
                             <span class="createSpan">
                                 <label for="name">Nombre</label>
-                                <input type="text" name="name" id="name" required>
+                                <input type="text" name="name" id="name" class="acrilico" required>
                             </span>
                             <span class="createSpan">
                                 <label for="categorie">Categoria</label>
-                                <select name="categorie" id="categorie" required>
+                                <select name="categorie" id="categorie" class="acrilico" required>
                                     <option value="ropa">Indumetaria</option>
                                     <option value="zapatillas">Zapatillas</option>
                                     <option value="suplementos">Suplementos</option>
@@ -46,11 +46,11 @@
                         <div>
                             <span class="createSpan">
                                 <label for="precio">Precio</label>
-                                <input type="number" name="precio" id="precio" required>
+                                <input type="number" name="precio" id="precio" class="acrilico" required>
                             </span>
                             <span class="createSpan">
                                 <label for="gender">Genero</label>
-                                <select name="gender" id="gender">
+                                <select name="gender" id="gender" class="acrilico">
                                     <option value="" selected>Sin Género</option>
                                     <option value="male">Hombre</option>
                                     <option value="female">Mujer</option>
@@ -61,11 +61,11 @@
 
                         <span class="createSpan">
                             <label for="color">Color</label>
-                            <input type="text" name="color" id="color" required>
+                            <input type="text" name="color" id="color" class="acrilico" required>
                         </span>
                         <span class="createSpan">
                             <label for="bio">Descripción</label>
-                            <textarea name="bio" id="bio" required></textarea>
+                            <textarea name="bio" id="bio" class="acrilico" required></textarea>
                         </span>
                     </div>
                     <p class="checkboxTittle hidden" id="titTalles">Talles</p>
@@ -137,7 +137,7 @@
                         <span><input type="checkbox" name="40kg" id="40kg"><label for="40kg">40kg</label></span>
                     </div>
                     <div class=" submitButtonDiv">
-                        <button class="blackButton darkGlass">Crear</button>
+                        <button class="blackButton acrilico">Crear</button>
                     </div>
                 </form>
             </section>

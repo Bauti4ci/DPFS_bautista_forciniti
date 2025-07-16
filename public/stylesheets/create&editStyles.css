@@ -56,17 +56,13 @@ form {
 }
 
 input {
-    border-radius: 25px;
     padding: 5px;
-    border: 0.2px solid rgba(255, 255, 255, 0.125);
     font-weight: 600;
     font-size: 14px;
 }
 
 select {
-    border-radius: 25px;
-    padding: 3px;
-    border: 0.2px solid rgba(255, 255, 255, 0.125);
+    padding: 6px;
     min-width: 177px;
     font-weight: 600;
     font-size: 14px;

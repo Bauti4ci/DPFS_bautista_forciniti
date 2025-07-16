@@ -132,7 +132,7 @@ nav div {
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  padding: 6px;
+  padding: 6px 16px;
   height: 40px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
