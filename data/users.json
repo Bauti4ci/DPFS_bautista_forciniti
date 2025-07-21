@@ -308,7 +308,7 @@
         "email": "verstappen@gmail.com",
         "password": "ver3301",
         "number": 1133010133,
-        "type": null
+        "type": "Cliente"
     },
     {
         "id": 32,
@@ -319,6 +319,28 @@
         "email": "gaga1234@gmail.com",
         "password": "$2b$10$YSxBmo5QVAbcRQzJU00TGOjMezat83uKbhoIBlA32sAodxcMq.YB2",
         "number": 1150459876,
+        "type": "Cliente"
+    },
+    {
+        "id": 33,
+        "image": "/usersImages/image-1752859306773-192642223.jpeg",
+        "firstNames": "Bautista",
+        "lastNames": "Forciniti",
+        "dni": 47347987,
+        "email": "bauti.forci@gmail.com",
+        "password": "$2b$10$6YAFayMoM2SIjzkccaLvtecaA.TqhEIwcUyjaoZvGpZHQvO/QMXru",
+        "number": 1151349075,
+        "type": "Cliente"
+    },
+    {
+        "id": 34,
+        "image": "/usersImages/image-1753104906688-428090369.jpg",
+        "firstNames": "gaga",
+        "lastNames": "gaga",
+        "dni": 12345678,
+        "email": "gaga@gmail.com",
+        "password": "$2b$10$X8LIWZuKWsKu0b8d8kj6AOppYD.PtB2KL.Ebl8lUuROBophI6hEwe",
+        "number": 1122223333,
         "type": null
     }
 ]

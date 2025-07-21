@@ -26,11 +26,7 @@ section {
     gap: 12px;
     width: 10%;
     padding: 15px;
-    /* backdrop-filter: blur(12px) saturate(185%);
-    -webkit-backdrop-filter: blur(12px) saturate(185%);
-    background-color: rgba(17, 25, 40, 0.05);
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.125); */
+
     height: min-content;
 }
 
@@ -41,9 +37,6 @@ section {
     gap: 3px;
     align-items: center;
     align-content: center;
-    /*  border: 0px solid;
-    border-radius: 25px;
-    background-color: black; */
     color: #000000;
 }
 
@@ -60,8 +53,7 @@ section {
 }
 
 .productGrid span {
-    width: 30%;
-    max-width: 400px;
+    width: 400px;
     height: auto;
     max-height: 500px;
     display: flex;
@@ -92,15 +84,83 @@ section {
 }
 
 .productGrid span img {
-    width: 400px;
-    height: 400px;
+    max-width: 400px;
+    width: 100%;
+    max-height: 400px;
+    height: auto;
+    margin: 0 auto;
     object-fit: cover;
     overflow: hidden;
     border: 0px solid black;
     border-radius: 10px;
 }
 
-.productGrid span a {
+.productGrid a {
     text-decoration: none;
+    width: 100%;
+    height: 100%;
     color: black;
+}
+
+.productGrid a * {
+    width: 100%;
+}
+
+
+@media (max-width: 1440px) {
+    .productGrid {
+        width: max-content;
+    }
+
+}
+
+@media (max-width: 1129px) {
+
+    h1 {
+        font-size: 38px;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    section {
+        flex-direction: column;
+        gap: 30px;
+
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Categories {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .productGrid {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .productGrid img {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+    .productGrid span {
+        width: 90%;
+    }
 }

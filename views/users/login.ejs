@@ -19,21 +19,28 @@
             <%= title %>
         </h1>
         <hr>
-        <form action="">
-            <label for="mail">Correo electronico</label>
-            <input type="email" name="" id="mail" class="acrilico" required>
-            <label for="pass">Contraseña</label>
-            <input type="password" name="" id="pass" class="acrilico" required>
+        <form action="/users/login" method="POST">
+            <label for="email">Correo electronico</label>
+            <input type="email" name="email" id="email" class="acrilico" required>
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" id="password" class="acrilico" required>
 
-            <span class="rememberBox">
-                <input type="checkbox" name="" id="remember">
-                <label for="remember">Recordarme</label>
+            <% if (locals.errors) { %>
+                <p class="error-text">
+                    <%= errors.email.msg %>
+                </p>
+                <% } %>
 
-            </span>
+                    <span class="rememberBox">
+                        <input type="checkbox" name="remember" id="remember">
+                        <label for="remember">Recordarme</label>
 
-            <button class="blackButton acrilico" style="padding: 10px; width: 150px; margin: 0 auto;">Acceder</button>
+                    </span>
 
-            <a class="forgot">¿Olvidaste tu contraseña?</a>
+                    <button class="blackButton acrilico"
+                        style="padding: 10px; width: 150px; margin: 0 auto;">Acceder</button>
+
+                    <a class="forgot">¿Olvidaste tu contraseña?</a>
         </form>
         <hr style="margin: 50px 0px; border: 1px solid rgb(175, 175, 175);">
         <div class="logOptions">

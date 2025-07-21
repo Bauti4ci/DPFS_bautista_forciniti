@@ -1,0 +1,66 @@
+section {
+    margin: 0 auto;
+    width: min-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    gap: 5px;
+    justify-content: space-around;
+    backdrop-filter: blur(12px) saturate(185%);
+    -webkit-backdrop-filter: blur(12px) saturate(185%);
+    background-color: rgba(17, 25, 40, 0.05);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    padding: 30px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.bigContainer {
+    display: flex;
+    margin-top: 40px;
+}
+
+.infoDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    width: 240px;
+    gap: 5px;
+}
+
+h1 {
+    min-width: 300px;
+    text-align: center;
+}
+
+.profileImage {
+    width: 200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.profileOptions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    font-size: 20px;
+    padding: 10px;
+    gap: 5px;
+}
+
+.profileOptions a {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: auto;
+    text-decoration: none;
+}

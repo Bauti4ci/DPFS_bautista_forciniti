@@ -15,6 +15,11 @@ const User = {
         const userFound = allUsers.find(user => user.id == id);
         return userFound;
     },
+    findByField: (field, text) => {
+        const allUsers = User.findAll();
+        const userFound = allUsers.find(user => user[field] === text);
+        return userFound;
+    },
     create: (userData) => {
         const allUsers = User.findAll();
 
@@ -26,9 +31,7 @@ const User = {
             ...userData
         };
 
-
         allUsers.push(newUser);
-
 
         fs.writeFileSync(usersFilePath, JSON.stringify(allUsers, null, 4));
 

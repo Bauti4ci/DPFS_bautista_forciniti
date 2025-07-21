@@ -4,6 +4,7 @@
     <title>
         <%= title %>
     </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/productDetails.css' />
 </head>
@@ -41,8 +42,6 @@
                     </span>
 
                     <% if (product.gender) { %>
-                        <!--                         <p style="font-size: 18px; font-weight: 600;">Género</p>
- -->
                         <span class="sizes">
                             <% product.gender.forEach(gender=> { %>
                                 <div>

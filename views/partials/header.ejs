@@ -5,8 +5,22 @@
             <img src="/svg/search.svg" alt="Lupa">
             <input type="text">
         </form>
-        <a href="/product/cart"><img src="/svg/cart.svg" alt="Carrito" class="cart"></a>
-        <a href="/users/login"><button class="blackButton glass">Log in</button></a>
-        <a href="/users/register"><button class="blackButton glass">Sign up</button></a>
+
+        <% if (locals.userLogged !==undefined) { %>
+
+            <a href="/product/cart"><button class="blackButton glass"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16" alt="carrito">
+                        <path
+                            d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z" />
+                    </svg></button></a>
+            <a href="/users/profile"><button class="blackButton glass"><svg xmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                    </svg></button></a>
+
+            <% } else { %>
+                <a href="/users/login"><button class="blackButton glass">Log in</button></a>
+                <a href="/users/register"><button class="blackButton glass">Sign up</button></a>
+                <% } %>
     </div>
 </nav>

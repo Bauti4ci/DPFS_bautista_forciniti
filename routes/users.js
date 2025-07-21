@@ -16,17 +16,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-let usersController = require('../controllers/usersController')
+let usersController = require('../controllers/usersController');
 
-// Get
-router.get('/login', usersController.log)
-router.get('/register', usersController.create)
+// GET
+router.get('/login', usersController.log);
+router.get('/register', usersController.create);
+router.get('/profile', usersController.profile);
 
-//Post
-router.post('/register', upload.single('image'), usersController.store)
-
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'PowerUp Store' });
-});
+//POST
+router.post('/login', usersController.processLogin);
+router.post('/register', upload.single('image'), usersController.store);
 
 module.exports = router;
