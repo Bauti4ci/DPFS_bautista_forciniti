@@ -31,16 +31,17 @@ section {
 }
 
 
-.Categories button {
+.Categories a {
     display: flex;
     justify-content: center;
     gap: 3px;
     align-items: center;
     align-content: center;
     color: #000000;
+    text-decoration: none;
 }
 
-.Categories button:hover {
+.Categories a:hover {
     background-color: black;
     color: #ffffff;
 }

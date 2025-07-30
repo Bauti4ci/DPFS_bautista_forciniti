@@ -83,7 +83,7 @@ h2 {
     gap: 10px;
 }
 
-.sizes div {
+.sizes label {
     box-sizing: border-box;
     min-width: 83px;
     padding: 10px 20px;
@@ -94,6 +94,8 @@ h2 {
     background-color: rgba(17, 25, 40, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.125);
     cursor: pointer;
+    transition: all 0.2s ease;
+
 }
 
 .buyOptions {
@@ -115,7 +117,22 @@ h2 {
     cursor: pointer;
 }
 
-.sizes .option-box.selected {
+.goBack {
+    top: 125px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+
+.sizes label:has(input[type="radio"]:checked) {
+    background-color: black;
+    color: white;
+    border-color: black;
+}
+
+.sizes label:hover {
     background-color: black;
     color: white;
 }

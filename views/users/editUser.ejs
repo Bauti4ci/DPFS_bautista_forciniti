@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/formStyles.css' />
+    <link rel='stylesheet' href='/stylesheets/profileStyles.css' />
+</head>
+
+<body>
+    <main>
+        <a href="/users/profile"><button class="goBack acrilico"><img src="/svg/leftarrow.svg"
+                    alt="Volver al perfil"></button></a>
+
+        <h1>
+            <%= title %>
+        </h1>
+
+        <form action="/users/update" method="POST" enctype="multipart/form-data">
+            <section>
+                <div>
+                    <p>Imagen de Perfil Actual</p>
+                    <img src="<%= user.image_url %>" class="profileImage"
+                        alt="Foto de perfil de <%= user.first_names %>">
+                    <label for="image" style="margin-top: 10px; display: block;">Cambiar imagen (opcional)</label>
+                    <input type="file" id="image" name="image" class="imageUpload acrilico">
+                </div>
+
+                <div class="bigContainer">
+                    <div class="infoDiv">
+                        <span>
+                            <label for="first_names">Nombre</label>
+                            <input type="text" name="first_names" id="first_names" class="acrilico"
+                                value="<%= user.first_names %>" required>
+                        </span>
+                    </div>
+                    <div class="infoDiv">
+                        <span>
+                            <label for="last_names">Apellido</label>
+                            <input type="text" name="last_names" id="last_names" class="acrilico"
+                                value="<%= user.last_names %>" required>
+                        </span>
+                    </div>
+
+                    <div class="infoDiv">
+                        <span>
+                            <label for="dni">DNI</label>
+                            <input type="number" name="dni" id="dni" class="acrilico" value="<%= user.dni %>" required>
+                        </span>
+                    </div>
+                    <div class="infoDiv">
+                        <span>
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" class="acrilico" value="<%= user.email %>"
+                                required>
+                        </span>
+                    </div>
+                    <div class="infoDiv">
+                        <span>
+                            <label for="phone">Teléfono</label>
+                            <input type="text" name="phone" id="phone" class="acrilico" value="<%= user.phone || '' %>">
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="profileOptions">
+                <button type="submit" class="blackButton glass">Guardar Cambios</button>
+            </div>
+        </form>
+    </main>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+
+</html>

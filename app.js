@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session'); // Se usa 'var' para mantener consistencia
+var session = require('express-session');
+const db = require('./database/models');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,7 +13,6 @@ const { log } = require('console');
 
 var app = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -28,15 +28,30 @@ app.use(session({
   saveUninitialized: false,
 }));
 
-app.use(function (req, res, next) {
-  console.log(req.cookies.userLogged);
-  if (req.session.userLogged !== undefined) {
-    res.locals.userLogged = req.session.userLogged
+app.use(async (req, res, next) => {
+  if (req.session.userLogged) {
+    res.locals.userLogged = req.session.userLogged;
+    return next();
   }
-  return next()
-})
 
-// Rutas
+  const emailFromCookie = req.cookies.userEmail;
+  if (emailFromCookie) {
+    try {
+      const userFromCookie = await db.User.findOne({ where: { email: emailFromCookie } });
+
+      if (userFromCookie) {
+        delete userFromCookie.password;
+        req.session.userLogged = userFromCookie;
+        res.locals.userLogged = userFromCookie;
+      }
+    } catch (error) {
+      console.error('Error al procesar la cookie de "Recordarme":', error);
+    }
+  }
+
+  return next();
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/product', productsRouter);
@@ -52,5 +67,13 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+db.sequelize.sync({ force: false })
+  .then(() => {
+    console.log('Base de datos sincronizada correctamente.');
+  })
+  .catch(error => {
+    console.error('Error al sincronizar la base de datos:', error);
+  });
 
 module.exports = app;

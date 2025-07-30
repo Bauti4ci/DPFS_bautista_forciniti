@@ -15,6 +15,9 @@
 
             <section class="principal">
 
+                <a href="/product"><button class="goBack acrilico"><img src="/svg/leftarrow.svg" alt=""></button></a>
+
+
                 <!--   <div class="alternativePhotos">
                     <img src="" alt="foto 1">
                     <img src="" alt="foto 2">
@@ -28,7 +31,7 @@
                     <img src="" alt="foto 10">
                 </div> -->
 
-                <img src="<%= product.image  %>" alt="<%= product.name  %>" class="productImage">
+                <img src="<%= product.image_url  %>" alt="<%= product.name  %>" class="productImage">
 
                 <div class="firstDetails">
 
@@ -41,13 +44,11 @@
                         </h3>
                     </span>
 
-                    <% if (product.gender) { %>
+                    <% if (product.gender && product.gender.name !=='Sin Género' ) { %>
                         <span class="sizes">
-                            <% product.gender.forEach(gender=> { %>
-                                <div>
-                                    <%= gender %>
-                                </div>
-                                <% }) %>
+                            <div>
+                                <%= product.gender.name %>
+                            </div>
                         </span>
                         <% } %>
 
@@ -69,56 +70,94 @@
 
 
 
-                                    <% if (product.wearSize) { %>
-                                        <p style="font-size: 18px; font-weight: 600;">Talles</p>
-                                        <span class="sizes">
-                                            <% product.wearSize.forEach(size=> { %>
-                                                <div>
-                                                    <%= size %>
-                                                </div>
-                                                <% }) %>
-                                        </span>
-                                        <% } %>
+                                    <form action="/product/cart/add/<%= product.id %>" method="POST">
 
-                                            <% if (product.size) { %>
-                                                <p style="font-size: 18px; font-weight: 600;">Tamaños</p>
-                                                <span class="sizes">
-                                                    <% product.size.forEach(size=> { %>
-                                                        <div>
-                                                            <%= size %>
-                                                        </div>
-                                                        <% }) %>
-                                                </span>
-                                                <% } %>
-
-                                                    <% if (product.footSize) { %>
-                                                        <p style="font-size: 18px; font-weight: 600;">Talles</p>
-                                                        <span class="sizes">
-                                                            <% product.footSize.forEach(size=> { %>
-                                                                <div>
-                                                                    <%= size %>
-                                                                </div>
-                                                                <% }) %>
-                                                        </span>
-                                                        <% } %>
-
-                                                            <% if (product.weight) { %>
-                                                                <p style="font-size: 18px; font-weight: 600;">Peso</p>
-                                                                <span class="sizes">
-                                                                    <% product.weight.forEach(weight=> { %>
-                                                                        <div>
-                                                                            <%= weight %>
-                                                                        </div>
-                                                                        <% }) %>
-                                                                </span>
-                                                                <% } %>
+                                        <% if (product.wearSizes && product.wearSizes.length> 0) { %>
+                                            <p style="font-size: 18px; font-weight: 600;">Talles</p>
+                                            <span class="sizes">
+                                                <% product.wearSizes.forEach((size, index)=> { %>
 
 
+                                                    <label for="wear_<%= size.id %>">
+                                                        <%= size.value %>
+                                                            <input type="radio" id="wear_<%= size.id %>" name="size"
+                                                                value="wear_size_id:<%= size.id %>" <%=index===0
+                                                                ? 'checked' : '' %> required>
+                                                    </label>
+                                                    <% }) %>
+                                            </span>
+                                            <% } %>
 
-                                                                    <span class="buyOptions darkGlass">
-                                                                        <button>Comprar</button>
-                                                                        <button>Agregar al carrito</button>
+                                                <% if (product.footSizes && product.footSizes.length> 0) { %>
+                                                    <p style="font-size: 18px; font-weight: 600;">Talles</p>
+                                                    <span class="sizes">
+                                                        <% product.footSizes.forEach((size, index)=> { %>
+
+
+                                                            <label for="foot_<%= size.id %>">
+                                                                <%= size.value %>
+                                                                    <input type="radio" id="foot_<%= size.id %>"
+                                                                        name="size" value="foot_size_id:<%= size.id %>"
+                                                                        <%=index===0 ? 'checked' : '' %> required>
+                                                            </label>
+
+                                                            <% }) %>
+                                                    </span>
+                                                    <% } %>
+
+                                                        <% if (product.sizes && product.sizes.length> 0) { %>
+                                                            <p style="font-size: 18px; font-weight: 600;">Tamaño</p>
+                                                            <span class="sizes">
+                                                                <% product.sizes.forEach((size, index)=> { %>
+                                                                    
+                                                                    <label for="size_<%= size.id %>">
+                                                                        <%= size.value %>
+                                                                        <input type="radio" id="size_<%= size.id %>"
+                                                                            name="size" value="size_id:<%= size.id %>"
+                                                                            <%=index===0 ? 'checked' : '' %> required>
+                                                                        </label>
+                                                                    
+                                                                    <% }) %>
+                                                            </span>
+                                                            <% } %>
+
+                                                                <% if (product.weights && product.weights.length> 0) {
+                                                                    %>
+                                                                    <p style="font-size: 18px; font-weight: 600;">Peso
+                                                                    </p>
+                                                                    <span class="sizes">
+                                                                        <% product.weights.forEach((weight, index)=> {
+                                                                            %>
+                                                                            
+                                                                            <label for="weight_<%= weight.id %>">
+                                                                                <%= weight.value %>
+                                                                                <input type="radio"
+                                                                                    id="weight_<%= weight.id %>"
+                                                                                    name="size"
+                                                                                    value="weight_id:<%= weight.id %>"
+                                                                                    <%=index===0 ? 'checked' : '' %>
+                                                                                required>
+                                                                                </label>
+                                                                            
+                                                                            <% }) %>
                                                                     </span>
+                                                                    <% } %>
+
+                                                                        <div style="margin-top: 20px;">
+                                                                            <label for="quantity"
+                                                                                style="font-size: 18px; font-weight: 600; margin-right: 10px;">Cantidad</label>
+                                                                            <input type="number" name="quantity"
+                                                                                id="quantity" value="1" min="1"
+                                                                                style="width: 60px; padding: 5px; text-align: center;"
+                                                                                class="acrilico">
+                                                                        </div>
+
+                                                                        <span class="buyOptions darkGlass">
+                                                                            <button>Comprar</button>
+                                                                            <button type="submit">Agregar al
+                                                                                carrito</button>
+                                                                        </span>
+                                    </form>
 
                 </div>
 

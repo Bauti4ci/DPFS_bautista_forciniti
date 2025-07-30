@@ -1,6 +1,8 @@
 section {
     margin: 0 auto;
     width: min-content;
+    min-width: 300px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,25 +16,48 @@ section {
     background-color: rgba(17, 25, 40, 0.05);
     border-radius: 18px;
     border: 1px solid rgba(255, 255, 255, 0.125);
-    padding: 30px;
     font-size: 18px;
     font-weight: 600;
 }
 
 .bigContainer {
     display: flex;
-    margin-top: 40px;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin-top: 20px;
+    padding: 10px;
+    min-width: 300px;
+    width: 100%;
+    gap: 20px;
 }
 
 .infoDiv {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     align-content: center;
+    justify-content: center;
     text-align: center;
-    width: 240px;
-    gap: 5px;
+    width: 100%;
+    gap: 20px;
+    margin: 0 auto;
+}
+
+.infoDiv span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.infoDiv span * {
+    margin: 0;
+}
+
+.infoDiv input {
+    text-align: center;
 }
 
 h1 {

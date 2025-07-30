@@ -2,33 +2,36 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const multer = require('multer');
+const productController = require('../controllers/productController');
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: (req, file, cb) => {
         cb(null, path.join(__dirname, '../public/productsImages'));
     },
-    filename: function (req, file, cb) {
+    filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         const fileExtension = path.extname(file.originalname);
         cb(null, file.fieldname + '-' + uniqueSuffix + fileExtension);
     }
 });
-
 const upload = multer({ storage: storage });
 
-let productController = require('../controllers/productController')
+router.get('/', productController.index);
+router.get('/detail/:id', productController.show);
 
-// Get
-router.get('/', productController.index)
-router.get('/detail/:id', productController.show)
-router.get('/cart', productController.cart)
-router.get('/create', productController.create)
-router.get('/edit/:id', productController.edit);
-router.get('/delete', productController.delete);
-
-// Post
+router.get('/create', productController.create);
 router.post('/new', upload.single('image'), productController.store);
-router.post('/edit/:id', upload.single('image'), productController.update);
-router.post('/destroy', productController.destroy);
+
+router.get('/edit/:id', productController.edit);
+router.post('/update/:id', upload.single('image'), productController.update);
+
+router.post('/delete/:id', productController.destroy);
+
+router.get('/cart', productController.cart);
+router.post('/cart/add/:id', productController.addToCart);
+router.post('/cart/remove/:itemId', productController.removeFromCart);
+
+
+
 
 module.exports = router;

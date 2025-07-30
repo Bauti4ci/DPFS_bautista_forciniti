@@ -1,9 +1,9 @@
 <nav>
     <a href="/" class="logo"><img src="/images/powerup-store.png" alt="PowerUp Store" class="logoImg"></a>
     <div>
-        <form action="" class="searchBar glass">
+        <form action="/product" method="GET" class="searchBar glass">
             <img src="/svg/search.svg" alt="Lupa">
-            <input type="text">
+            <input type="text" name="q">
         </form>
 
         <% if (locals.userLogged !==undefined) { %>
