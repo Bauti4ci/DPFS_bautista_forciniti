@@ -2,6 +2,9 @@ const bcrypt = require('bcryptjs');
 const db = require('../database/models');
 const User = db.User;
 
+const { validationResult } = require('express-validator');
+
+
 const usersController = {
     log: function (req, res) {
         res.render('users/login', { title: 'Inicio de sesión' });
@@ -34,6 +37,14 @@ const usersController = {
         res.render('users/register', { title: 'Registro' });
     },
     store: async function (req, res) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.render('users/register', {
+                title: 'Registro',
+                errors: errors.mapped(),
+                oldData: req.body
+            });
+        }
         const t = await db.sequelize.transaction();
         try {
             const existingUser = await db.User.findOne({ where: { email: req.body.email } });

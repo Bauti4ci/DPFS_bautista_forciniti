@@ -4,11 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+const cors = require('cors');
 const db = require('./database/models');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/products.js');
+var apiRouter = require('./routes/api/apiRoutes');
+
 const { log } = require('console');
 
 var app = express();
@@ -52,9 +55,12 @@ app.use(async (req, res, next) => {
   return next();
 });
 
+app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/product', productsRouter);
+app.use('/api', apiRouter);
+
 
 app.use(function (req, res, next) {
   next(createError(404));

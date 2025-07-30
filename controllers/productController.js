@@ -102,6 +102,9 @@ const productController = {
 
 
     store: async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+        }
         const t = await db.sequelize.transaction();
         try {
             const formData = req.body;

@@ -27,18 +27,29 @@
                 <span>
                     <label for="name">Nombres</label>
                     <input type="text" name="name" id="name" class="acrilico" required>
+                    <p class="error-msg" id="name-error" style="color:red; font-size:12px;"></p>
+
                     <label for="lname">Apellidos</label>
                     <input type="text" name="lname" id="lname" class="acrilico" required>
+                    <p class="error-msg" id="name-error" style="color:red; font-size:12px;"></p>
+
                     <label for="dni">DNI</label>
                     <input type="number" name="dni" id="dni" class="acrilico" required>
+                    <p class="error-msg" id="name-error" style="color:red; font-size:12px;"></p>
+
                 </span>
                 <span>
                     <label for="email">Correo electronico</label>
                     <input type="email" name="email" id="email" class="acrilico" required>
+                    <p class="error-msg" id="name-error" style="color:red; font-size:12px;"></p>
+
                     <label for="password">Contraseña</label>
                     <input type="password" name="password" id="password" class="acrilico" required>
+                    <p class="error-msg" id="name-error" style="color:red; font-size:12px;"></p>
+
                     <label for="phone">Telefono</label>
                     <input type="number" name="phone" id="phone" class="acrilico">
+                    <p class="error-msg" id="name-error" style="color:red; font-size:12px;"></p>
                 </span>
             </div>
             <button class="blackButton acrilico" style="padding: 10px; width: 150px; margin: 0 auto;">Acceder</button>
@@ -53,5 +64,8 @@
     </main>
 
 </body>
+
+<script src="/scripts/registerValidation.js"></script>
+
 
 </html>
