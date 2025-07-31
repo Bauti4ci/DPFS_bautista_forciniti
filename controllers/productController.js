@@ -2,6 +2,9 @@ const { Op } = require('sequelize');
 const db = require('../database/models');
 const Product = db.Product;
 
+const { validationResult } = require('express-validator');
+
+
 const productController = {
     index: async (req, res) => {
         try {
@@ -103,8 +106,35 @@ const productController = {
 
     store: async (req, res) => {
         const errors = validationResult(req);
+
         if (!errors.isEmpty()) {
+            try {
+                const [categories, genders, wearSizes, footSizes, weights, sizes] = await Promise.all([
+                    db.Category.findAll(),
+                    db.Gender.findAll(),
+                    db.WearSize.findAll(),
+                    db.FootSize.findAll(),
+                    db.Weight.findAll(),
+                    db.Size.findAll()
+                ]);
+
+                return res.render('products/createProduct', {
+                    title: 'Crear Producto',
+                    errors: errors.mapped(),
+                    oldData: req.body,
+                    categories,
+                    genders,
+                    wearSizes,
+                    footSizes,
+                    weights,
+                    sizes
+                });
+            } catch (dbError) {
+                console.error("Error al recargar datos para el formulario:", dbError);
+                return res.status(500).send("Ocurrió un error al procesar el formulario.");
+            }
         }
+
         const t = await db.sequelize.transaction();
         try {
             const formData = req.body;
@@ -121,7 +151,6 @@ const productController = {
             }, { transaction: t });
 
             const stockData = formData.stock || {};
-
             const associationMap = {
                 wear: 'addWearSize',
                 foot: 'addFootSize',
@@ -129,16 +158,13 @@ const productController = {
                 size: 'addSize'
             };
 
-
             for (const type in stockData) {
                 const sizes = stockData[type];
                 const addMethod = associationMap[type];
-
                 if (addMethod) {
                     for (const sizeId in sizes) {
                         const stock = parseInt(sizes[sizeId], 10);
                         if (!isNaN(stock) && stock > 0) {
-
                             await newProduct[addMethod](sizeId, {
                                 through: { stock: stock },
                                 transaction: t
@@ -288,24 +314,41 @@ const productController = {
                 where: { user_id: userId, status: 'activo' }
             });
 
-            const product = await db.Product.findByPk(productId);
-            const [sizeType, sizeId] = size.split(':');
-
-            let itemData = {
+            let whereCondition = {
                 cart_id: cart.id,
-                product_id: productId,
-                [sizeType]: sizeId
+                product_id: productId
             };
 
-            const existingItem = await db.CartDetail.findOne({ where: itemData });
+            if (size) {
+                const [sizeType, sizeId] = size.split(':');
+                whereCondition[sizeType] = sizeId;
+            } else {
+                whereCondition.wear_size_id = null;
+                whereCondition.foot_size_id = null;
+                whereCondition.weight_id = null;
+                whereCondition.size_id = null;
+            }
+
+            const existingItem = await db.CartDetail.findOne({ where: whereCondition });
 
             if (existingItem) {
                 existingItem.quantity += parseInt(quantity, 10);
                 await existingItem.save();
             } else {
-                itemData.quantity = parseInt(quantity, 10);
-                itemData.unit_price = product.price;
-                await db.CartDetail.create(itemData);
+                const product = await db.Product.findByPk(productId);
+                let newItemData = {
+                    cart_id: cart.id,
+                    product_id: productId,
+                    quantity: parseInt(quantity, 10),
+                    unit_price: product.price
+                };
+
+                if (size) {
+                    const [sizeType, sizeId] = size.split(':');
+                    newItemData[sizeType] = sizeId;
+                }
+
+                await db.CartDetail.create(newItemData);
             }
 
             res.redirect('/product/cart');
