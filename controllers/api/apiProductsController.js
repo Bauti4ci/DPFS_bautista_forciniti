@@ -17,7 +17,7 @@ const apiProductsController = {
                 id: product.id,
                 name: product.name,
                 description: product.description,
-                category: product.category, // Relación principal
+                category: product.category,
                 detail: `/api/products/${product.id}`
             }));
 

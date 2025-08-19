@@ -1,9 +1,9 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session');
 const cors = require('cors');
 const db = require('./database/models');
 
@@ -25,34 +25,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
-  secret: 'powerup_secret_string',
-  resave: false,
-  saveUninitialized: false,
-}));
-
 app.use(async (req, res, next) => {
-  if (req.session.userLogged) {
-    res.locals.userLogged = req.session.userLogged;
-    return next();
-  }
-
-  const emailFromCookie = req.cookies.userEmail;
-  if (emailFromCookie) {
+  const token = req.cookies.jwt;
+  if (token) {
     try {
-      const userFromCookie = await db.User.findOne({ where: { email: emailFromCookie } });
-
-      if (userFromCookie) {
-        delete userFromCookie.password;
-        req.session.userLogged = userFromCookie;
-        res.locals.userLogged = userFromCookie;
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = await db.User.findByPk(decoded.id);
+      if (user) {
+        delete user.dataValues.password;
+        res.locals.userLogged = user;
       }
     } catch (error) {
-      console.error('Error al procesar la cookie de "Recordarme":', error);
+      res.locals.userLogged = null;
     }
   }
-
-  return next();
+  next();
 });
 
 app.use(cors());

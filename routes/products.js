@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const multer = require('multer');
+const { authMiddleware, adminMiddleware } = require('../middlewares/authMiddlewares');
+
 const productController = require('../controllers/productController');
 const productValidations = require('../middlewares/productValidator');
 
@@ -21,17 +23,17 @@ const upload = multer({ storage: storage });
 router.get('/', productController.index);
 router.get('/detail/:id', productController.show);
 
-router.get('/create', productController.create);
-router.post('/new', upload.single('image'), productValidations, productController.store);
+router.get('/create', [authMiddleware, adminMiddleware], productController.create);
+router.post('/new', [authMiddleware, adminMiddleware], upload.single('image'), productValidations, productController.store);
 
-router.get('/edit/:id', productController.edit);
-router.post('/update/:id', upload.single('image'), productController.update);
+router.get('/edit/:id', [authMiddleware, adminMiddleware], productController.edit);
+router.post('/update/:id', [authMiddleware, adminMiddleware], upload.single('image'), productController.update);
 
-router.post('/delete/:id', productController.destroy);
+router.post('/delete/:id', [authMiddleware, adminMiddleware], productController.destroy);
 
-router.get('/cart', productController.cart);
-router.post('/cart/add/:id', productController.addToCart);
-router.post('/cart/remove/:itemId', productController.removeFromCart);
+router.get('/cart', authMiddleware, productController.cart);
+router.post('/cart/add/:id', authMiddleware, productController.addToCart);
+router.post('/cart/remove/:itemId', authMiddleware, productController.removeFromCart);
 
 
 

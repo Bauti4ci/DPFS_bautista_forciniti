@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 const db = require('../database/models');
-const User = db.User;
-
+const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
 
@@ -12,21 +11,46 @@ const usersController = {
 
     processLogin: async function (req, res) {
         try {
-            const userToLogin = await db.User.findOne({ where: { email: req.body.email } });
+            const userToLogin = await db.User.findOne({
+                where: { email: req.body.email },
+                include: [{ model: db.Role, as: 'roles' }]
+            });
 
-            if (userToLogin) {
-                const isPasswordCorrect = bcrypt.compareSync(req.body.password, userToLogin.password);
-                if (isPasswordCorrect) {
-                    delete userToLogin.password;
-                    req.session.userLogged = userToLogin;
-
-                    if (req.body.remember_me) {
-                        res.cookie('userEmail', req.body.email, { maxAge: 1000 * 60 * 60 * 24 * 30 });
-                    }
-
-                    return res.redirect('/users/profile');
-                }
+            if (!userToLogin) {
+                return res.render('users/login', {
+                    title: 'Inicio de sesión',
+                    errors: { email: { msg: 'Credenciales inválidas' } }
+                });
             }
+
+            const isPasswordCorrect = bcrypt.compareSync(req.body.password, userToLogin.password);
+
+            if (isPasswordCorrect) {
+                const payload = {
+                    id: userToLogin.id,
+                    email: userToLogin.email,
+                    roles: userToLogin.roles.map(role => role.role_name)
+                };
+
+                const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                    expiresIn: '1h'
+                });
+
+                res.cookie('jwt', token, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production',
+                    maxAge: 3600000
+                });
+
+                return res.redirect('/users/profile');
+
+            } else {
+                return res.render('users/login', {
+                    title: 'Inicio de sesión',
+                    errors: { email: { msg: 'Credenciales inválidas' } }
+                });
+            }
+
         } catch (error) {
             console.error("Error en el login:", error);
             res.status(500).send("Ocurrió un error en el servidor.");
@@ -93,45 +117,28 @@ const usersController = {
 
 
     logout: function (req, res) {
-        res.clearCookie('userEmail');
-
-        req.session.destroy(function (err) {
-            if (err) {
-                console.log(err);
-            }
-
-            return res.redirect('/');
-        });
+        res.clearCookie('jwt');
+        return res.redirect('/');
     },
 
     profile: function (req, res) {
-        if (req.session.userLogged) {
-            res.render('users/profile', {
-                title: 'Mi Perfil',
-                user: req.session.userLogged
-            });
-        } else {
-            res.redirect('/users/login');
-        }
+        res.render('users/profile', {
+            title: 'Mi Perfil',
+            user: req.user
+        });
     },
 
     edit: async function (req, res) {
-        try {
-            const userToEdit = await db.User.findByPk(req.session.userLogged.id);
 
-            res.render('users/editUser', {
-                title: 'Editar Perfil',
-                user: userToEdit
-            });
-        } catch (error) {
-            console.error("Error al cargar el perfil para editar:", error);
-            res.status(500).send("Ocurrió un error en el servidor.");
-        }
+        res.render('users/editUser', {
+            title: 'Editar Perfil',
+            user: req.user
+        });
     },
 
     update: async function (req, res) {
         try {
-            const userId = req.session.userLogged.id;
+            const userId = req.user.id;
             const userToUpdate = await db.User.findByPk(userId);
 
             const imagePath = req.file ? `/usersImages/${req.file.filename}` : userToUpdate.image_url;

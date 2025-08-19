@@ -5,7 +5,7 @@ const apiUsersController = {
     list: async (req, res) => {
         try {
             const users = await db.User.findAll({
-                attributes: ['id', 'first_names', 'last_names', 'email'] // Solo los campos necesarios
+                attributes: ['id', 'first_names', 'last_names', 'email']
             });
 
             const usersWithDetail = users.map(user => ({

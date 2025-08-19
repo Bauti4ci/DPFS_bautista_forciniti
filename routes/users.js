@@ -4,6 +4,8 @@ const path = require('path');
 const multer = require('multer');
 const usersController = require('../controllers/usersController');
 const registerValidations = require('../middlewares/registerValidator');
+const { authMiddleware } = require('../middlewares/authMiddlewares');
+
 
 
 const storage = multer.diskStorage({
@@ -24,11 +26,11 @@ router.post('/register', upload.single('image'), registerValidations, usersContr
 router.get('/login', usersController.log);
 router.post('/login', usersController.processLogin);
 
-router.post('/logout', usersController.logout);
+router.post('/logout', authMiddleware, usersController.logout);
 
-router.get('/profile', usersController.profile);
+router.get('/profile', authMiddleware, usersController.profile);
 
-router.get('/edit', usersController.edit);
-router.post('/update', upload.single('image'), usersController.update);
+router.get('/edit', authMiddleware, usersController.edit);
+router.post('/update', authMiddleware, upload.single('image'), usersController.update);
 
 module.exports = router;
