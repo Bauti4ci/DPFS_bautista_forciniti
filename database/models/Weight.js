@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Weight',
-    tableName: 'Weights',
+    tableName: 'weights',
     timestamps: false
   });
   return Weight;

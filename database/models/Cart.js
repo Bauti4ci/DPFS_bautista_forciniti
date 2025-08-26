@@ -16,18 +16,18 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     Cart.init({
-        user_id: { 
+        user_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        status: { 
+        status: {
             type: DataTypes.ENUM('activo', 'completado', 'abandonado'),
             defaultValue: 'activo'
         }
     }, {
         sequelize,
         modelName: 'Cart',
-        tableName: 'Carts',
+        tableName: 'carts',
         timestamps: true,
         createdAt: 'created_at',
         updatedAt: 'updated_at'

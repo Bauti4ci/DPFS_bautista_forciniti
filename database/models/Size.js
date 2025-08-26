@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         modelName: 'Size',
-        tableName: 'Sizes',
+        tableName: 'sizes',
         timestamps: false
     });
     return Size;
