@@ -104,7 +104,7 @@ const usersController = {
             await t.commit();
 
             delete newUser.dataValues.password;
-            req.session.userLogged = newUser;
+            req.user = newUser;
 
             return res.redirect('/users/profile');
 
@@ -154,14 +154,14 @@ const usersController = {
 
             const updatedUser = await db.User.findByPk(userId);
             delete updatedUser.dataValues.password;
-            req.session.userLogged = updatedUser;
+            req.user = updatedUser;
 
             res.redirect('/users/profile');
 
         } catch (error) {
             console.error("Error al actualizar el usuario:", error);
             if (error.name === 'SequelizeUniqueConstraintError') {
-                const userToEdit = await db.User.findByPk(req.session.userLogged.id);
+                const userToEdit = await db.User.findByPk(req.user.id);
                 return res.render('users/editProfile', {
                     title: 'Editar Perfil',
                     user: userToEdit,

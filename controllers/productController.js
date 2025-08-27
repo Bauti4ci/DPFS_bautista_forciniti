@@ -302,11 +302,11 @@ const productController = {
     },
     addToCart: async (req, res) => {
         try {
-            if (!req.session.userLogged) {
+            if (!req.user) {
                 return res.redirect('/users/login');
             }
 
-            const userId = req.session.userLogged.id;
+            const userId = req.user.id;
             const productId = req.params.id;
             const { size, quantity } = req.body;
 
@@ -361,11 +361,11 @@ const productController = {
 
     cart: async (req, res) => {
         try {
-            if (!req.session.userLogged) {
+            if (!req.user) {
                 return res.redirect('/users/login');
             }
 
-            const userId = req.session.userLogged.id;
+            const userId = req.user.id;
             const cart = await db.Cart.findOne({
                 where: { user_id: userId, status: 'activo' },
                 include: {
@@ -397,11 +397,11 @@ const productController = {
     },
     removeFromCart: async (req, res) => {
         try {
-            if (!req.session.userLogged) {
+            if (!req.user) {
                 return res.redirect('/users/login');
             }
 
-            const userId = req.session.userLogged.id;
+            const userId = req.user.id;
             const cartItemId = req.params.itemId;
 
             const cart = await db.Cart.findOne({ where: { user_id: userId, status: 'activo' } });
