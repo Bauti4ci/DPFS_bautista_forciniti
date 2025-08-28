@@ -56,8 +56,8 @@ const productController = {
                 include: [
                     { association: 'category' },
                     { association: 'gender' },
-                    { association: 'wearSizes' },
-                    { association: 'footSizes' },
+                    { association: 'wearsizes' },
+                    { association: 'footsizes' },
                     { association: 'weights' },
                     { association: 'sizes' }
                 ]
