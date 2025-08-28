@@ -5,17 +5,17 @@ module.exports = (sequelize, DataTypes) => {
     class CartDetail extends Model {
         static associate(models) {
             CartDetail.belongsTo(models.Cart, {
-                as: 'cart',
+                as: 'carts',
                 foreignKey: 'cart_id'
             });
             CartDetail.belongsTo(models.Product, {
-                as: 'product',
+                as: 'products',
                 foreignKey: 'product_id'
             });
-            CartDetail.belongsTo(models.WearSize, { foreignKey: 'wear_size_id', as: 'wearSize' });
-            CartDetail.belongsTo(models.FootSize, { foreignKey: 'foot_size_id', as: 'footSize' });
-            CartDetail.belongsTo(models.Weight, { foreignKey: 'weight_id', as: 'weight' });
-            CartDetail.belongsTo(models.Size, { foreignKey: 'size_id', as: 'size' });
+            CartDetail.belongsTo(models.WearSize, { foreignKey: 'wear_size_id', as: 'wearsizes' });
+            CartDetail.belongsTo(models.FootSize, { foreignKey: 'foot_size_id', as: 'footsizes' });
+            CartDetail.belongsTo(models.Weight, { foreignKey: 'weight_id', as: 'weights' });
+            CartDetail.belongsTo(models.Size, { foreignKey: 'size_id', as: 'sizes' });
         }
     }
     CartDetail.init({
