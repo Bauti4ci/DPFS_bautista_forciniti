@@ -372,10 +372,10 @@ const productController = {
                     model: db.CartDetail,
                     as: 'items',
                     include: [
-                        { model: db.Product, as: 'product' },
-                        { model: db.WearSize, as: 'wearSize' },
-                        { model: db.FootSize, as: 'footSize' },
-                        { model: db.Weight, as: 'weight' },
+                        { model: db.Product, as: 'products' },
+                        { model: db.WearSize, as: 'wearsizes' },
+                        { model: db.FootSize, as: 'footsizes' },
+                        { model: db.Weight, as: 'weights' },
                         { model: db.Size, as: 'size' }
                     ]
                 }
