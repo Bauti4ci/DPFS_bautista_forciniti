@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     FootSize.init({
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false
+        },
         value: {
             type: DataTypes.STRING(20),
             allowNull: false,
