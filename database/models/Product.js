@@ -15,16 +15,16 @@ module.exports = (sequelize, DataTypes) => {
             });
 
             Product.belongsToMany(models.WearSize, {
-                as: 'wearSizes',
-                through: 'Product_WearSizes',
+                as: 'wearsizes',
+                through: 'product_wearsizes',
                 foreignKey: 'product_id',
                 otherKey: 'wear_size_id',
                 timestamps: false
             });
 
             Product.belongsToMany(models.FootSize, {
-                as: 'footSizes',
-                through: 'Product_FootSizes',
+                as: 'footsizes',
+                through: 'product_footsizes',
                 foreignKey: 'product_id',
                 otherKey: 'foot_size_id',
                 timestamps: false
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
 
             Product.belongsToMany(models.Weight, {
                 as: 'weights',
-                through: 'Product_Weights',
+                through: 'product_weights',
                 foreignKey: 'product_id',
                 otherKey: 'weight_id',
                 timestamps: false
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
 
             Product.belongsToMany(models.Size, {
                 as: 'sizes',
-                through: 'Product_Sizes',
+                through: 'product_sizes',
                 foreignKey: 'product_id',
                 otherKey: 'size_id',
                 timestamps: false
