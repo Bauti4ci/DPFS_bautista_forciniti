@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
         sequelize,
-        modelName: 'FootSize',
-        tableName: 'footSizes',
+        modelName: 'Footsize',
+        tableName: 'footsizes',
         timestamps: false
     });
     return FootSize;

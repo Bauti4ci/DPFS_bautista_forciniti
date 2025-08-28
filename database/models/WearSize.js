@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
         sequelize,
-        modelName: 'WearSize',
-        tableName: 'wearSizes',
+        modelName: 'Wearsize',
+        tableName: 'wearsizes',
         timestamps: false
     });
     return WearSize;
