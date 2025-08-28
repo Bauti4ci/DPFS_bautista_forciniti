@@ -79,7 +79,7 @@ const productController = {
 
     create: async (req, res) => {
         try {
-            const [categories, genders, wearSizes, footSizes, weights, sizes] = await Promise.all([
+            const [categories, genders, wearsizes, footsizes, weights, sizes] = await Promise.all([
                 db.Category.findAll({ order: [['name', 'ASC']] }),
                 db.Gender.findAll(),
                 db.WearSize.findAll({ order: [['id', 'ASC']] }),
@@ -92,8 +92,8 @@ const productController = {
                 title: "Crear un Producto",
                 categories,
                 genders,
-                wearSizes,
-                footSizes,
+                wearsizes,
+                footsizes,
                 weights,
                 sizes
             });
@@ -109,7 +109,7 @@ const productController = {
 
         if (!errors.isEmpty()) {
             try {
-                const [categories, genders, wearSizes, footSizes, weights, sizes] = await Promise.all([
+                const [categories, genders, wearsizes, footsizes, weights, sizes] = await Promise.all([
                     db.Category.findAll(),
                     db.Gender.findAll(),
                     db.WearSize.findAll(),
@@ -124,8 +124,8 @@ const productController = {
                     oldData: req.body,
                     categories,
                     genders,
-                    wearSizes,
-                    footSizes,
+                    wearsizes,
+                    footsizes,
                     weights,
                     sizes
                 });
@@ -186,13 +186,13 @@ const productController = {
 
     edit: async (req, res) => {
         try {
-            const [productToEdit, allCategories, allGenders, allWearSizes, allFootSizes, allWeights, allSizes] = await Promise.all([
+            const [productToEdit, allCategories, allGenders, allWearsizes, allFootsizes, allWeights, allSizes] = await Promise.all([
                 db.Product.findByPk(req.params.id, {
                     include: [
                         { association: 'category' },
                         { association: 'gender' },
-                        { association: 'wearSizes' },
-                        { association: 'footSizes' },
+                        { association: 'wearsizes' },
+                        { association: 'footsizes' },
                         { association: 'weights' },
                         { association: 'sizes' }
                     ]
@@ -214,8 +214,8 @@ const productController = {
                 product: productToEdit,
                 allCategories,
                 allGenders,
-                allWearSizes,
-                allFootSizes,
+                allWearsizes,
+                allFootsizes,
                 allWeights,
                 allSizes
             });
@@ -248,8 +248,8 @@ const productController = {
                 gender_id: formData.gender_id
             }, { transaction: t });
 
-            await productToUpdate.setWearSizes([], { transaction: t });
-            await productToUpdate.setFootSizes([], { transaction: t });
+            await productToUpdate.setWearsizes([], { transaction: t });
+            await productToUpdate.setFootsizes([], { transaction: t });
             await productToUpdate.setWeights([], { transaction: t });
             await productToUpdate.setSizes([], { transaction: t });
 
