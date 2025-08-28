@@ -16,20 +16,31 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
-    );
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
+// --- INICIO DE LA MODIFICACIÓN ---
+
+// Lista explícita de tus modelos
+const modelFiles = [
+  'User.js',
+  'Role.js',
+  'Category.js',
+  'Gender.js',
+  'Product.js',
+  'Cart.js', // Aseguramos que Cart se cargue antes que CartDetail
+  'CartDetail.js',
+  'FootSize.js',
+  'Size.js',
+  'WearSize.js',
+  'Weight.js'
+  // ...agrega aquí cualquier otro archivo de modelo si falta
+];
+
+modelFiles.forEach(file => {
+  const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+  db[model.name] = model;
+});
+
+
+// --- FIN DE LA MODIFICACIÓN ---
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
