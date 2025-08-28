@@ -24,14 +24,13 @@ const modelFiles = [
   'Role.js',
   'Category.js',
   'Gender.js',
-  'Product.js',
-  'Cart.js', // Aseguramos que Cart se cargue antes que CartDetail
-  'CartDetail.js',
   'FootSize.js',
   'Size.js',
   'WearSize.js',
-  'Weight.js'
-  // ...agrega aquí cualquier otro archivo de modelo si falta
+  'Weight.js',
+  'Product.js',
+  'Cart.js', 
+  'CartDetail.js'
 ];
 
 modelFiles.forEach(file => {
