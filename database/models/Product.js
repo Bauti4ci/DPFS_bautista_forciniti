@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     class Product extends Model {
         static associate(models) {
             Product.belongsTo(models.Category, {
-                as: 'category',
+                as: 'categories',
                 foreignKey: 'category_id'
             });
 
