@@ -94,7 +94,7 @@ const usersController = {
                 image_url: imagePath
             }, { transaction: t });
 
-            const customerRole = await db.Role.findOne({ where: { role_name: 'cliente' } });
+            const customerRole = await db.Role.findOne({ where: { role_name: 'Cliente' } });
             if (customerRole) {
                 await newUser.addRole(customerRole, { transaction: t });
             } else {
