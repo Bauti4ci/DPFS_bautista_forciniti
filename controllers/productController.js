@@ -376,7 +376,7 @@ const productController = {
                         { model: db.WearSize, as: 'wearsizes' },
                         { model: db.FootSize, as: 'footsizes' },
                         { model: db.Weight, as: 'weights' },
-                        { model: db.Size, as: 'size' }
+                        { model: db.Size, as: 'sizes' }
                     ]
                 }
             });
