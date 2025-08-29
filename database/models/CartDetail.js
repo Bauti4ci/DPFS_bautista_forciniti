@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'cart_id'
             });
             CartDetail.belongsTo(models.Product, {
-                as: 'products',
+                as: 'product',
                 foreignKey: 'product_id'
             });
             CartDetail.belongsTo(models.WearSize, { foreignKey: 'wear_size_id', as: 'wearsizes' });
