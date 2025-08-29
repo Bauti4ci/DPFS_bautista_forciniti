@@ -1,9 +1,21 @@
 const { Op } = require('sequelize');
-const db = require('../database/models');
-const Product = db.Product;
-
 const { validationResult } = require('express-validator');
 
+// 1. IMPORTACIONES DE MODELOS CONSOLIDADAS
+// Se importan todos los modelos necesarios para este controlador en un solo lugar.
+const {
+    Product,
+    Category,
+    Gender,
+    WearSize,
+    FootSize,
+    Weight,
+    Size,
+    Cart,
+    CartDetail
+} = require('../database/models');
+
+const db = require('../database/models'); // Mantenemos db para acceder a 'sequelize' en las transacciones
 
 const productController = {
     index: async (req, res) => {
@@ -22,18 +34,17 @@ const productController = {
 
             if (categoryId) {
                 whereCondition.category_id = categoryId;
-
             }
 
             const [products, allCategories] = await Promise.all([
-                db.Product.findAll({
+                Product.findAll({ // <-- Modificado
                     where: whereCondition,
                     include: [
                         { association: 'category' },
                         { association: 'gender' }
                     ]
                 }),
-                db.Category.findAll({ order: [['name', 'ASC']] })
+                Category.findAll({ order: [['name', 'ASC']] }) // <-- Modificado
             ]);
 
             res.render('products/productList', {
@@ -51,8 +62,7 @@ const productController = {
 
     show: async (req, res) => {
         try {
-            const productToShow = await Product.findByPk(req.params.id, {
-
+            const productToShow = await Product.findByPk(req.params.id, { // <-- Ya estaba bien
                 include: [
                     { association: 'category' },
                     { association: 'gender' },
@@ -61,7 +71,6 @@ const productController = {
                     { association: 'weights' },
                     { association: 'sizes' }
                 ]
-
             });
             if (productToShow) {
                 res.render('products/productDetail', {
@@ -80,12 +89,12 @@ const productController = {
     create: async (req, res) => {
         try {
             const [categories, genders, wearsizes, footsizes, weights, sizes] = await Promise.all([
-                db.Category.findAll({ order: [['name', 'ASC']] }),
-                db.Gender.findAll(),
-                db.WearSize.findAll({ order: [['id', 'ASC']] }),
-                db.FootSize.findAll({ order: [['id', 'ASC']] }),
-                db.Weight.findAll({ order: [['id', 'ASC']] }),
-                db.Size.findAll({ order: [['id', 'ASC']] })
+                Category.findAll({ order: [['name', 'ASC']] }), // <-- Modificado
+                Gender.findAll(),                               // <-- Modificado
+                WearSize.findAll({ order: [['id', 'ASC']] }),   // <-- Modificado
+                FootSize.findAll({ order: [['id', 'ASC']] }),   // <-- Modificado
+                Weight.findAll({ order: [['id', 'ASC']] }),     // <-- Modificado
+                Size.findAll({ order: [['id', 'ASC']] })        // <-- Modificado
             ]);
 
             res.render('products/createProduct', {
@@ -103,19 +112,18 @@ const productController = {
         }
     },
 
-
     store: async (req, res) => {
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
             try {
                 const [categories, genders, wearsizes, footsizes, weights, sizes] = await Promise.all([
-                    db.Category.findAll(),
-                    db.Gender.findAll(),
-                    db.WearSize.findAll(),
-                    db.FootSize.findAll(),
-                    db.Weight.findAll(),
-                    db.Size.findAll()
+                    Category.findAll(), // <-- Modificado
+                    Gender.findAll(),   // <-- Modificado
+                    WearSize.findAll(), // <-- Modificado
+                    FootSize.findAll(), // <-- Modificado
+                    Weight.findAll(),   // <-- Modificado
+                    Size.findAll()      // <-- Modificado
                 ]);
 
                 return res.render('products/createProduct', {
@@ -135,12 +143,12 @@ const productController = {
             }
         }
 
-        const t = await db.sequelize.transaction();
+        const t = await db.sequelize.transaction(); // <-- Mantenemos 'db.sequelize'
         try {
             const formData = req.body;
             const imagePath = req.file ? `/productsImages/${req.file.filename}` : null;
 
-            const newProduct = await db.Product.create({
+            const newProduct = await Product.create({ // <-- Modificado
                 name: formData.name,
                 price: Number(formData.precio),
                 description: formData.bio,
@@ -187,7 +195,7 @@ const productController = {
     edit: async (req, res) => {
         try {
             const [productToEdit, allCategories, allGenders, allWearsizes, allFootsizes, allWeights, allSizes] = await Promise.all([
-                db.Product.findByPk(req.params.id, {
+                Product.findByPk(req.params.id, { // <-- Modificado
                     include: [
                         { association: 'category' },
                         { association: 'gender' },
@@ -197,12 +205,12 @@ const productController = {
                         { association: 'sizes' }
                     ]
                 }),
-                db.Category.findAll({ order: [['name', 'ASC']] }),
-                db.Gender.findAll(),
-                db.WearSize.findAll({ order: [['id', 'ASC']] }),
-                db.FootSize.findAll({ order: [['id', 'ASC']] }),
-                db.Weight.findAll({ order: [['id', 'ASC']] }),
-                db.Size.findAll({ order: [['id', 'ASC']] })
+                Category.findAll({ order: [['name', 'ASC']] }), // <-- Modificado
+                Gender.findAll(),                               // <-- Modificado
+                WearSize.findAll({ order: [['id', 'ASC']] }),   // <-- Modificado
+                FootSize.findAll({ order: [['id', 'ASC']] }),   // <-- Modificado
+                Weight.findAll({ order: [['id', 'ASC']] }),     // <-- Modificado
+                Size.findAll({ order: [['id', 'ASC']] })        // <-- Modificado
             ]);
 
             if (!productToEdit) {
@@ -227,12 +235,12 @@ const productController = {
     },
 
     update: async (req, res) => {
-        const t = await db.sequelize.transaction();
+        const t = await db.sequelize.transaction(); // <-- Mantenemos 'db.sequelize'
         try {
             const productId = req.params.id;
             const formData = req.body;
 
-            const productToUpdate = await db.Product.findByPk(productId);
+            const productToUpdate = await Product.findByPk(productId); // <-- Modificado
             if (!productToUpdate) {
                 return res.status(404).send('Producto no encontrado');
             }
@@ -278,8 +286,6 @@ const productController = {
             await t.commit();
             res.redirect(`/product/detail/${productId}`);
 
-            /*  res.redirect(`/product`);
-             */
         } catch (error) {
             await t.rollback();
             console.error("Error al actualizar el producto:", error);
@@ -291,7 +297,7 @@ const productController = {
         try {
             const productId = req.params.id;
 
-            await db.Product.destroy({
+            await Product.destroy({ // <-- Modificado
                 where: { id: productId }
             });
             res.redirect('/product');
@@ -300,6 +306,9 @@ const productController = {
             res.status(500).send("Ocurrió un error en el servidor.");
         }
     },
+
+    // --- MÉTODOS DEL CARRITO ---
+
     addToCart: async (req, res) => {
         try {
             if (!req.user) {
@@ -310,7 +319,7 @@ const productController = {
             const productId = req.params.id;
             const { size, quantity } = req.body;
 
-            const [cart] = await db.Cart.findOrCreate({
+            const [cart] = await Cart.findOrCreate({ // <-- Modificado
                 where: { user_id: userId, status: 'activo' }
             });
 
@@ -319,23 +328,24 @@ const productController = {
                 product_id: productId
             };
 
+            // Limpiamos los campos de talla para asegurar una búsqueda precisa
+            whereCondition.wear_size_id = null;
+            whereCondition.foot_size_id = null;
+            whereCondition.weight_id = null;
+            whereCondition.size_id = null;
+
             if (size) {
                 const [sizeType, sizeId] = size.split(':');
                 whereCondition[sizeType] = sizeId;
-            } else {
-                whereCondition.wear_size_id = null;
-                whereCondition.foot_size_id = null;
-                whereCondition.weight_id = null;
-                whereCondition.size_id = null;
             }
 
-            const existingItem = await db.CartDetail.findOne({ where: whereCondition });
+            const existingItem = await CartDetail.findOne({ where: whereCondition }); // <-- Modificado
 
             if (existingItem) {
                 existingItem.quantity += parseInt(quantity, 10);
                 await existingItem.save();
             } else {
-                const product = await db.Product.findByPk(productId);
+                const product = await Product.findByPk(productId); // <-- Modificado
                 let newItemData = {
                     cart_id: cart.id,
                     product_id: productId,
@@ -348,7 +358,7 @@ const productController = {
                     newItemData[sizeType] = sizeId;
                 }
 
-                await db.CartDetail.create(newItemData);
+                await CartDetail.create(newItemData); // <-- Modificado
             }
 
             res.redirect('/product/cart');
@@ -365,36 +375,32 @@ const productController = {
                 return res.redirect('/users/login');
             }
 
-            const userId = req.user.id;
-            const cart = await db.Cart.findOne({
+            const cart = await Cart.findOne({ // <-- Modificado y limpiado
                 where: { user_id: req.user.id, status: 'activo' },
-                include: {
+                include: [{
                     model: CartDetail,
                     as: 'items',
                     include: [
-                        { model: db.Product, as: 'product' },
-                        { model: db.WearSize, as: 'wearsizes' },
-                        { model: db.FootSize, as: 'footsizes' },
-                        { model: db.Weight, as: 'weights' },
-                        { model: db.Size, as: 'sizes' }
+                        { model: Product, as: 'product' },
+                        { model: WearSize, as: 'wearSize' },
+                        { model: FootSize, as: 'footSize' },
+                        { model: Weight, as: 'weight' },
+                        { model: Size, as: 'size' }
                     ]
-                }
+                }]
             });
-
-            let total = 0;
-            if (cart && cart.items) {
-                total = cart.items.reduce((acc, item) => acc + (item.quantity * item.unit_price), 0);
-            }
 
             res.render('products/productCart', {
                 title: "Carrito de Compras",
                 cart: cart
             });
+
         } catch (error) {
             console.error("Error al mostrar el carrito:", error);
             res.status(500).send("Ocurrió un error en el servidor.");
         }
     },
+
     removeFromCart: async (req, res) => {
         try {
             if (!req.user) {
@@ -404,13 +410,13 @@ const productController = {
             const userId = req.user.id;
             const cartItemId = req.params.itemId;
 
-            const cart = await db.Cart.findOne({ where: { user_id: userId, status: 'activo' } });
+            const cart = await Cart.findOne({ where: { user_id: userId, status: 'activo' } }); // <-- Modificado
 
             if (cart) {
-                await db.CartDetail.destroy({
+                await CartDetail.destroy({ // <-- Modificado
                     where: {
                         id: cartItemId,
-                        cart_id: cart.id
+                        cart_id: cart.id // Asegura que el item pertenezca al carrito del usuario
                     }
                 });
             }
