@@ -366,13 +366,13 @@ const productController = {
             }
 
             const userId = req.user.id;
-            const cart = await Cart.findOne({
+            const cart = await db.Cart.findOne({
                 where: { user_id: req.user.id, status: 'activo' },
                 include: {
                     model: CartDetail,
                     as: 'items',
                     include: [
-                        { model: Product, as: 'product' },
+                        { model: db.Product, as: 'product' },
                         { model: db.WearSize, as: 'wearsizes' },
                         { model: db.FootSize, as: 'footsizes' },
                         { model: db.Weight, as: 'weights' },
