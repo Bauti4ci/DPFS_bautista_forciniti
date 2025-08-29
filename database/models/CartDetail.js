@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
                 as: 'product',
                 foreignKey: 'product_id'
             });
-            CartDetail.belongsTo(models.WearSize, { foreignKey: 'wear_size_id', as: 'wearsizes' });
-            CartDetail.belongsTo(models.FootSize, { foreignKey: 'foot_size_id', as: 'footsizes' });
-            CartDetail.belongsTo(models.Weight, { foreignKey: 'weight_id', as: 'weights' });
-            CartDetail.belongsTo(models.Size, { foreignKey: 'size_id', as: 'sizes' });
+            CartDetail.belongsTo(models.WearSize, { foreignKey: 'wear_size_id', as: 'wearSize' });
+            CartDetail.belongsTo(models.FootSize, { foreignKey: 'foot_size_id', as: 'footSize' });
+            CartDetail.belongsTo(models.Weight, { foreignKey: 'weight_id', as: 'weight' });
+            CartDetail.belongsTo(models.Size, { foreignKey: 'size_id', as: 'size' });
         }
     }
     CartDetail.init({
