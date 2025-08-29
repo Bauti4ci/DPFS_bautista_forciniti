@@ -13,6 +13,8 @@ var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/products.js');
 var apiRouter = require('./routes/api/apiRoutes');
 
+app.use('/usersImages', express.static(path.join(__dirname, 'public/usersImages')));
+
 const { log } = require('console');
 
 var app = express();

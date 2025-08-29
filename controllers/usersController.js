@@ -124,7 +124,7 @@ const usersController = {
     profile: function (req, res) {
         res.render('users/profile', {
             title: 'Mi Perfil',
-            user: req.user
+            userLogged: req.user
         });
     },
 
