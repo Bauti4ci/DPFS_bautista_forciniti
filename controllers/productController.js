@@ -2,7 +2,6 @@ const { Op } = require('sequelize');
 const { validationResult } = require('express-validator');
 
 // 1. IMPORTACIONES DE MODELOS CONSOLIDADAS
-// Se importan todos los modelos necesarios para este controlador en un solo lugar.
 const {
     Product,
     Category,
@@ -21,7 +20,6 @@ const productController = {
     index: async (req, res) => {
         try {
             const { q: searchQuery, category: categoryId } = req.query;
-
             let whereCondition = {};
             let pageTitle = "Nuestro Catálogo de Productos";
             if (searchQuery) {
@@ -31,29 +29,25 @@ const productController = {
                 ];
                 pageTitle = `Resultados para: "${searchQuery}"`;
             }
-
             if (categoryId) {
                 whereCondition.category_id = categoryId;
             }
-
             const [products, allCategories] = await Promise.all([
-                Product.findAll({ // <-- Modificado
+                Product.findAll({
                     where: whereCondition,
                     include: [
                         { association: 'category' },
                         { association: 'gender' }
                     ]
                 }),
-                Category.findAll({ order: [['name', 'ASC']] }) // <-- Modificado
+                Category.findAll({ order: [['name', 'ASC']] })
             ]);
-
             res.render('products/productList', {
                 title: pageTitle,
                 products: products,
                 allCategories: allCategories,
                 currentCategory: categoryId
             });
-
         } catch (error) {
             console.error("Error al listar/buscar productos:", error);
             res.status(500).send("Ocurrió un error en el servidor.");
@@ -62,7 +56,7 @@ const productController = {
 
     show: async (req, res) => {
         try {
-            const productToShow = await Product.findByPk(req.params.id, { // <-- Ya estaba bien
+            const productToShow = await Product.findByPk(req.params.id, {
                 include: [
                     { association: 'category' },
                     { association: 'gender' },
@@ -89,23 +83,26 @@ const productController = {
     create: async (req, res) => {
         try {
             const [categories, genders, wearsizes, footsizes, weights, sizes] = await Promise.all([
-                Category.findAll({ order: [['name', 'ASC']] }), // <-- Modificado
-                Gender.findAll(),                               // <-- Modificado
-                WearSize.findAll({ order: [['id', 'ASC']] }),   // <-- Modificado
-                FootSize.findAll({ order: [['id', 'ASC']] }),   // <-- Modificado
-                Weight.findAll({ order: [['id', 'ASC']] }),     // <-- Modificado
-                Size.findAll({ order: [['id', 'ASC']] })        // <-- Modificado
+                Category.findAll({ order: [['name', 'ASC']] }),
+                Gender.findAll(),
+                WearSize.findAll({ order: [['id', 'ASC']] }),
+                FootSize.findAll({ order: [['id', 'ASC']] }),
+                Weight.findAll({ order: [['id', 'ASC']] }),
+                Size.findAll({ order: [['id', 'ASC']] })
             ]);
 
+            // ===== ESTE BLOQUE ES EL QUE FALTABA CORREGIR =====
             res.render('products/createProduct', {
                 title: "Crear un Producto",
                 categories,
                 genders,
-                wearsizes,
-                footsizes,
-                weights,
-                sizes
+                wearSizes: wearsizes,   // <-- CORREGIDO
+                footSizes: footsizes,   // <-- CORREGIDO
+                weights: weights,
+                sizes: sizes
             });
+            // =======================================================
+
         } catch (error) {
             console.error("Error al cargar el formulario de creación:", error);
             res.status(500).send("Ocurrió un error al cargar la página de creación.");
@@ -118,37 +115,37 @@ const productController = {
         if (!errors.isEmpty()) {
             try {
                 const [categories, genders, wearsizes, footsizes, weights, sizes] = await Promise.all([
-                    Category.findAll(), // <-- Modificado
-                    Gender.findAll(),   // <-- Modificado
-                    WearSize.findAll(), // <-- Modificado
-                    FootSize.findAll(), // <-- Modificado
-                    Weight.findAll(),   // <-- Modificado
-                    Size.findAll()      // <-- Modificado
+                    Category.findAll(),
+                    Gender.findAll(),
+                    WearSize.findAll(),
+                    FootSize.findAll(),
+                    Weight.findAll(),
+                    Size.findAll()
                 ]);
 
-                res.render('products/createProduct', {
-                    title: "Crear un Producto",
+                return res.render('products/createProduct', {
+                    title: 'Crear Producto',
+                    errors: errors.mapped(),
+                    oldData: req.body,
                     categories,
                     genders,
-                    wearSizes: wearsizes,   // <-- ESTA ES LA LÍNEA CORREGIDA
-                    footSizes: footsizes,   // <-- CORREGIDO TAMBIÉN
-                    weights,
-                    sizes
+                    wearSizes: wearsizes, // <-- Este ya estaba bien
+                    footSizes: footsizes, // <-- Este ya estaba bien
+                    weights: weights,
+                    sizes: sizes
                 });
-
-
             } catch (dbError) {
                 console.error("Error al recargar datos para el formulario:", dbError);
                 return res.status(500).send("Ocurrió un error al procesar el formulario.");
             }
         }
 
-        const t = await db.sequelize.transaction(); // <-- Mantenemos 'db.sequelize'
+        const t = await db.sequelize.transaction();
         try {
             const formData = req.body;
             const imagePath = req.file ? `/productsImages/${req.file.filename}` : null;
 
-            const newProduct = await Product.create({ // <-- Modificado
+            const newProduct = await Product.create({
                 name: formData.name,
                 price: Number(formData.precio),
                 description: formData.bio,
@@ -195,7 +192,7 @@ const productController = {
     edit: async (req, res) => {
         try {
             const [productToEdit, allCategories, allGenders, allWearsizes, allFootsizes, allWeights, allSizes] = await Promise.all([
-                Product.findByPk(req.params.id, { // <-- Modificado
+                Product.findByPk(req.params.id, {
                     include: [
                         { association: 'category' },
                         { association: 'gender' },
@@ -205,12 +202,12 @@ const productController = {
                         { association: 'sizes' }
                     ]
                 }),
-                Category.findAll({ order: [['name', 'ASC']] }), // <-- Modificado
-                Gender.findAll(),                               // <-- Modificado
-                WearSize.findAll({ order: [['id', 'ASC']] }),   // <-- Modificado
-                FootSize.findAll({ order: [['id', 'ASC']] }),   // <-- Modificado
-                Weight.findAll({ order: [['id', 'ASC']] }),     // <-- Modificado
-                Size.findAll({ order: [['id', 'ASC']] })        // <-- Modificado
+                Category.findAll({ order: [['name', 'ASC']] }),
+                Gender.findAll(),
+                WearSize.findAll({ order: [['id', 'ASC']] }),
+                FootSize.findAll({ order: [['id', 'ASC']] }),
+                Weight.findAll({ order: [['id', 'ASC']] }),
+                Size.findAll({ order: [['id', 'ASC']] })
             ]);
 
             if (!productToEdit) {
@@ -235,12 +232,12 @@ const productController = {
     },
 
     update: async (req, res) => {
-        const t = await db.sequelize.transaction(); // <-- Mantenemos 'db.sequelize'
+        const t = await db.sequelize.transaction();
         try {
             const productId = req.params.id;
             const formData = req.body;
 
-            const productToUpdate = await Product.findByPk(productId); // <-- Modificado
+            const productToUpdate = await Product.findByPk(productId);
             if (!productToUpdate) {
                 return res.status(404).send('Producto no encontrado');
             }
@@ -296,8 +293,7 @@ const productController = {
     destroy: async (req, res) => {
         try {
             const productId = req.params.id;
-
-            await Product.destroy({ // <-- Modificado
+            await Product.destroy({
                 where: { id: productId }
             });
             res.redirect('/product');
@@ -314,55 +310,47 @@ const productController = {
             if (!req.user) {
                 return res.redirect('/users/login');
             }
-
             const userId = req.user.id;
             const productId = req.params.id;
             const { size, quantity } = req.body;
 
-            const [cart] = await Cart.findOrCreate({ // <-- Modificado
+            const [cart] = await Cart.findOrCreate({
                 where: { user_id: userId, status: 'activo' }
             });
 
             let whereCondition = {
                 cart_id: cart.id,
-                product_id: productId
+                product_id: productId,
+                wear_size_id: null,
+                foot_size_id: null,
+                weight_id: null,
+                size_id: null
             };
-
-            // Limpiamos los campos de talla para asegurar una búsqueda precisa
-            whereCondition.wear_size_id = null;
-            whereCondition.foot_size_id = null;
-            whereCondition.weight_id = null;
-            whereCondition.size_id = null;
-
             if (size) {
                 const [sizeType, sizeId] = size.split(':');
                 whereCondition[sizeType] = sizeId;
             }
 
-            const existingItem = await CartDetail.findOne({ where: whereCondition }); // <-- Modificado
+            const existingItem = await CartDetail.findOne({ where: whereCondition });
 
             if (existingItem) {
                 existingItem.quantity += parseInt(quantity, 10);
                 await existingItem.save();
             } else {
-                const product = await Product.findByPk(productId); // <-- Modificado
+                const product = await Product.findByPk(productId);
                 let newItemData = {
                     cart_id: cart.id,
                     product_id: productId,
                     quantity: parseInt(quantity, 10),
                     unit_price: product.price
                 };
-
                 if (size) {
                     const [sizeType, sizeId] = size.split(':');
                     newItemData[sizeType] = sizeId;
                 }
-
-                await CartDetail.create(newItemData); // <-- Modificado
+                await CartDetail.create(newItemData);
             }
-
             res.redirect('/product/cart');
-
         } catch (error) {
             console.error("Error al agregar al carrito:", error);
             res.status(500).send("Ocurrió un error en el servidor.");
@@ -374,8 +362,7 @@ const productController = {
             if (!req.user) {
                 return res.redirect('/users/login');
             }
-
-            const cart = await Cart.findOne({ // <-- Modificado y limpiado
+            const cart = await Cart.findOne({
                 where: { user_id: req.user.id, status: 'activo' },
                 include: [{
                     model: CartDetail,
@@ -389,12 +376,10 @@ const productController = {
                     ]
                 }]
             });
-
             res.render('products/productCart', {
                 title: "Carrito de Compras",
                 cart: cart
             });
-
         } catch (error) {
             console.error("Error al mostrar el carrito:", error);
             res.status(500).send("Ocurrió un error en el servidor.");
@@ -406,23 +391,20 @@ const productController = {
             if (!req.user) {
                 return res.redirect('/users/login');
             }
-
             const userId = req.user.id;
             const cartItemId = req.params.itemId;
 
-            const cart = await Cart.findOne({ where: { user_id: userId, status: 'activo' } }); // <-- Modificado
+            const cart = await Cart.findOne({ where: { user_id: userId, status: 'activo' } });
 
             if (cart) {
-                await CartDetail.destroy({ // <-- Modificado
+                await CartDetail.destroy({
                     where: {
                         id: cartItemId,
-                        cart_id: cart.id // Asegura que el item pertenezca al carrito del usuario
+                        cart_id: cart.id
                     }
                 });
             }
-
             res.redirect('/product/cart');
-
         } catch (error) {
             console.error("Error al eliminar item del carrito:", error);
             res.status(500).send("Ocurrió un error en el servidor.");
