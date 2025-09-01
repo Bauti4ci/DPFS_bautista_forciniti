@@ -13,21 +13,26 @@ var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/products.js');
 var apiRouter = require('./routes/api/apiRoutes');
 
-app.use('/usersImages', express.static(path.join(__dirname, 'public/usersImages')));
-
-const { log } = require('console');
-
+// Se crea la aplicación ANTES de empezar a usarla.
 var app = express();
 
+// Configuración del View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Middlewares
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
+// Carpetas públicas (Static)
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/usersImages', express.static(path.join(__dirname, 'public/usersImages')));
+app.use('/productsImages', express.static(path.join(__dirname, 'public/productsImages')));
+
+
+// Middleware para verificar usuario logueado
 app.use(async (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
@@ -45,6 +50,7 @@ app.use(async (req, res, next) => {
   next();
 });
 
+// Rutas
 app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -52,10 +58,12 @@ app.use('/product', productsRouter);
 app.use('/api', apiRouter);
 
 
+// Manejo de errores 404
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
+// Manejador de errores general
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -64,6 +72,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
+// Sincronización de la base de datos
 db.sequelize.sync({ force: false })
   .then(() => {
     console.log('Base de datos sincronizada correctamente.');
@@ -72,4 +81,5 @@ db.sequelize.sync({ force: false })
     console.error('Error al sincronizar la base de datos:', error);
   });
 
+// Exportación del módulo (debe ser la última línea)
 module.exports = app;
