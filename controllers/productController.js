@@ -240,10 +240,13 @@ const productController = {
 
             const productToUpdate = await Product.findByPk(productId);
             if (!productToUpdate) {
+                await t.rollback(); // Hacemos rollback si no se encuentra el producto
                 return res.status(404).send('Producto no encontrado');
             }
 
             const imagePath = req.file ? `/productsImages/${req.file.filename}` : productToUpdate.image_url;
+
+            // Actualizar los datos principales del producto
             await productToUpdate.update({
                 name: formData.name,
                 price: Number(formData.precio),
@@ -254,15 +257,19 @@ const productController = {
                 gender_id: formData.gender_id
             }, { transaction: t });
 
+            // Resetear todas las asociaciones de talles para empezar de cero
             await productToUpdate.setWearsizes([], { transaction: t });
             await productToUpdate.setFootsizes([], { transaction: t });
             await productToUpdate.setWeights([], { transaction: t });
             await productToUpdate.setSizes([], { transaction: t });
 
+            // Volver a crear las asociaciones con el nuevo stock
             const stockData = formData.stock || {};
             const associationMap = {
-                wear: 'addWearSize', foot: 'addFootSize',
-                weight: 'addWeight', size: 'addSize'
+                wear: 'addWearSize',
+                foot: 'addFootSize',
+                weight: 'addWeight',
+                size: 'addSize'
             };
 
             for (const type in stockData) {
@@ -272,10 +279,12 @@ const productController = {
                     for (const sizeId in sizes) {
                         const stock = parseInt(sizes[sizeId], 10);
                         if (!isNaN(stock) && stock > 0) {
+                            // ===== LA CORRECCIÓN CLAVE ESTÁ AQUÍ =====
                             await productToUpdate[addMethod](sizeId, {
-                                through: { stock: stock },
+                                through: { stock: stock }, // Se añade el stock a la tabla intermedia
                                 transaction: t
                             });
+                            // =======================================
                         }
                     }
                 }
