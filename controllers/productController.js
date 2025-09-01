@@ -195,12 +195,12 @@ const productController = {
             const [productToEdit, allCategories, allGenders, allWearsizes, allFootsizes, allWeights, allSizes] = await Promise.all([
                 Product.findByPk(req.params.id, {
                     include: [
-                        { association: 'category' },
+                        { association: 'category' }, // Mantenemos los que son singulares
                         { association: 'gender' },
-                        { association: 'wearsizes' },
-                        { association: 'footsizes' },
-                        { association: 'weights' },
-                        { association: 'sizes' }
+                        { model: WearSize, as: 'wearSizes' },   // <-- CORREGIDO
+                        { model: FootSize, as: 'footSizes' },   // <-- CORREGIDO
+                        { model: Weight, as: 'weights' },
+                        { model: Size, as: 'sizes' }
                     ]
                 }),
                 Category.findAll({ order: [['name', 'ASC']] }),
