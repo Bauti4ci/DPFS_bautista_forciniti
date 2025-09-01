@@ -132,10 +132,10 @@ const productController = {
                     oldData: req.body,
                     categories,
                     genders,
-                    wearsizes,
-                    footsizes,
-                    weights,
-                    sizes
+                    wearSizes: wearsizes,
+                    footSizes: footsizes, 
+                    weights: weights,
+                    sizes: sizes
                 });
             } catch (dbError) {
                 console.error("Error al recargar datos para el formulario:", dbError);
