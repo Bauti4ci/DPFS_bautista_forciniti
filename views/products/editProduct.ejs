@@ -101,7 +101,7 @@
                                                         <p class="checkboxTittle">Talles y Stock</p>
                                                         <div class="checkboxList">
                                                                 <% allWearsizes.forEach(size=> { %>
-                                                                        <% const stock=existingWearsizes.get(size.id) ||
+                                                                        <% const stock=existingWearSizes.get(size.id) ||
                                                                                 0; %>
                                                                                 <div class="size-stock-item">
                                                                                         <input type="checkbox"
@@ -127,7 +127,7 @@
                                                         <p class="checkboxTittle">Talles y Stock</p>
                                                         <div class="checkboxList">
                                                                 <% allFootsizes.forEach(size=> { %>
-                                                                        <% const stock=existingFootsizes.get(size.id) ||
+                                                                        <% const stock=existingFootSizes.get(size.id) ||
                                                                                 0; %>
                                                                                 <div class="size-stock-item">
                                                                                         <input type="checkbox"
