@@ -126,17 +126,17 @@ const productController = {
                     Size.findAll()      // <-- Modificado
                 ]);
 
-                return res.render('products/createProduct', {
-                    title: 'Crear Producto',
-                    errors: errors.mapped(),
-                    oldData: req.body,
+                res.render('products/createProduct', {
+                    title: "Crear un Producto",
                     categories,
                     genders,
-                    wearSizes: wearsizes,
-                    footSizes: footsizes, 
-                    weights: weights,
-                    sizes: sizes
+                    wearSizes: wearsizes,   // <-- ESTA ES LA LÍNEA CORREGIDA
+                    footSizes: footsizes,   // <-- CORREGIDO TAMBIÉN
+                    weights,
+                    sizes
                 });
+
+
             } catch (dbError) {
                 console.error("Error al recargar datos para el formulario:", dbError);
                 return res.status(500).send("Ocurrió un error al procesar el formulario.");
