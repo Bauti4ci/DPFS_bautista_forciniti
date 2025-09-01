@@ -295,7 +295,7 @@ const productController = {
         } catch (error) {
             await t.rollback();
             console.error("Error al actualizar el producto:", error);
-            res.status(500).send("Ocurrió un error al actualizar el producto.");
+            res.status(500).send("Ocurrió un error en el servidor.");
         }
     },
 
