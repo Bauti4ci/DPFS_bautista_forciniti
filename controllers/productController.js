@@ -81,6 +81,7 @@ const productController = {
     },
 
     create: async (req, res) => {
+        console.log("--- VERSIÓN MÁS RECIENTE DEL CÓDIGO ESTÁ CORRIENDO ---");
         try {
             const [categories, genders, wearsizes, footsizes, weights, sizes] = await Promise.all([
                 Category.findAll({ order: [['name', 'ASC']] }),
