@@ -240,13 +240,12 @@ const productController = {
 
             const productToUpdate = await Product.findByPk(productId);
             if (!productToUpdate) {
-                await t.rollback(); // Hacemos rollback si no se encuentra el producto
+                await t.rollback();
                 return res.status(404).send('Producto no encontrado');
             }
 
             const imagePath = req.file ? `/productsImages/${req.file.filename}` : productToUpdate.image_url;
 
-            // Actualizar los datos principales del producto
             await productToUpdate.update({
                 name: formData.name,
                 price: Number(formData.precio),
@@ -257,7 +256,7 @@ const productController = {
                 gender_id: formData.gender_id
             }, { transaction: t });
 
-            // Resetear todas las asociaciones de talles para empezar de cero
+            // Resetear todas las asociaciones de talles
             await productToUpdate.setWearsizes([], { transaction: t });
             await productToUpdate.setFootsizes([], { transaction: t });
             await productToUpdate.setWeights([], { transaction: t });
