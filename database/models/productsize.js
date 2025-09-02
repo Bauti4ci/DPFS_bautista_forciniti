@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     class ProductSize extends Model {
         static associate(models) {
             ProductSize.belongsTo(models.Product, { foreignKey: 'product_id' });
-            ProductSize.belongsTo(models.Weight, { foreignKey: 'weight_id' });
+            ProductSize.belongsTo(models.Size, { foreignKey: 'size_id' });
         }
     }
     ProductSize.init({
