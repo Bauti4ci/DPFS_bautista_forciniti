@@ -38,18 +38,25 @@ app.use(async (req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const user = await db.User.findByPk(decoded.id);
+
+      // --- LÍNEA CORREGIDA ---
+      // Se añade el 'include' para traer siempre los roles del usuario
+      const user = await db.User.findByPk(decoded.id, {
+        include: [{ model: db.Role, as: 'roles' }]
+      });
+
       if (user) {
         delete user.dataValues.password;
         res.locals.userLogged = user;
       }
     } catch (error) {
+      // Es una buena práctica limpiar los datos si hay un error
+      console.error('Error en middleware de usuario:', error);
       res.locals.userLogged = null;
     }
   }
   next();
 });
-
 // Rutas
 app.use(cors());
 app.use('/', indexRouter);
