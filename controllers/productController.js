@@ -205,10 +205,22 @@ const productController = {
                     include: [
                         { association: 'category' },
                         { association: 'gender' },
-                        { association: 'wearsizes' },   // <-- CORREGIDO
-                        { association: 'footsizes' },   // <-- CORREGIDO
-                        { association: 'weights' },
-                        { association: 'sizes' }
+                        {
+                            association: 'wearsizes',
+                            through: { attributes: ['stock'] } // Pide explícitamente el stock
+                        },
+                        {
+                            association: 'footsizes',
+                            through: { attributes: ['stock'] } // Pide explícitamente el stock
+                        },
+                        {
+                            association: 'weights',
+                            through: { attributes: ['stock'] } // Pide explícitamente el stock
+                        },
+                        {
+                            association: 'sizes',
+                            through: { attributes: ['stock'] } // Pide explícitamente el stock
+                        }
                     ]
                 }),
                 Category.findAll({ order: [['name', 'ASC']] }),
