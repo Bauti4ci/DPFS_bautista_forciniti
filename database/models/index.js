@@ -32,7 +32,7 @@ fs
     db[model.name] = model;
   });
 
-// Ejecuta las asociaciones de los modelos SI existen
+// Ejecuta las asociaciones de los modelos SI existen, después de que TODOS han sido cargados
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
