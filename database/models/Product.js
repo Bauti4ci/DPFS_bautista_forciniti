@@ -14,9 +14,10 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'gender_id'
             });
 
+            // Aseguramos que todas las relaciones "through" usen el modelo correspondiente
             Product.belongsToMany(models.WearSize, {
                 as: 'wearsizes',
-                through: models.ProductWearSize,
+                through: models.ProductWearSize, // <-- Correcto
                 foreignKey: 'product_id',
                 otherKey: 'wear_size_id',
                 timestamps: false
@@ -24,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 
             Product.belongsToMany(models.FootSize, {
                 as: 'footsizes',
-                through: models.ProductFootSize,
+                through: models.ProductFootSize, // <-- Correcto
                 foreignKey: 'product_id',
                 otherKey: 'foot_size_id',
                 timestamps: false
@@ -32,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
 
             Product.belongsToMany(models.Weight, {
                 as: 'weights',
-                through: models.ProductWeight,
+                through: models.ProductWeight, // <-- Correcto
                 foreignKey: 'product_id',
                 otherKey: 'weight_id',
                 timestamps: false
@@ -40,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
 
             Product.belongsToMany(models.Size, {
                 as: 'sizes',
-                through: models.ProductSize, // <-- CAMBIADO: Usa el modelo, no un string
+                through: models.ProductSize, // <-- Correcto
                 foreignKey: 'product_id',
                 otherKey: 'size_id',
                 timestamps: false
