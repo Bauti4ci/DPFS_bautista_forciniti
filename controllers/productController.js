@@ -19,7 +19,9 @@ const db = require('../database/models'); // Mantenemos db para acceder a 'seque
 const productController = {
     index: async (req, res) => {
         try {
-            const { q: searchQuery, category: categoryId } = req.query;
+            // 1. Se extrae el parámetro 'edit' de la URL (req.query)
+            const { q: searchQuery, category: categoryId, edit: editModeQuery } = req.query;
+
             let whereCondition = {};
             let pageTitle = "Nuestro Catálogo de Productos";
             if (searchQuery) {
@@ -29,9 +31,11 @@ const productController = {
                 ];
                 pageTitle = `Resultados para: "${searchQuery}"`;
             }
+
             if (categoryId) {
                 whereCondition.category_id = categoryId;
             }
+
             const [products, allCategories] = await Promise.all([
                 Product.findAll({
                     where: whereCondition,
@@ -42,12 +46,16 @@ const productController = {
                 }),
                 Category.findAll({ order: [['name', 'ASC']] })
             ]);
+
+            // 2. Se pasa una variable booleana 'editMode' a la vista
             res.render('products/productList', {
                 title: pageTitle,
                 products: products,
                 allCategories: allCategories,
-                currentCategory: categoryId
+                currentCategory: categoryId,
+                editMode: editModeQuery === 'true' // Esto será true o false
             });
+
         } catch (error) {
             console.error("Error al listar/buscar productos:", error);
             res.status(500).send("Ocurrió un error en el servidor.");
