@@ -206,20 +206,20 @@ const productController = {
                         { association: 'category' },
                         { association: 'gender' },
                         {
-                            association: 'wearsizes',
-                            through: { attributes: ['stock'] } // Pide explícitamente el stock
+                            association: 'wearSizes', // <-- Usamos el alias estandarizado
+                            through: { attributes: ['stock'] } // <-- Pedimos explícitamente el stock
                         },
                         {
-                            association: 'footsizes',
-                            through: { attributes: ['stock'] } // Pide explícitamente el stock
+                            association: 'footSizes', // <-- Usamos el alias estandarizado
+                            through: { attributes: ['stock'] } // <-- Pedimos explícitamente el stock
                         },
                         {
                             association: 'weights',
-                            through: { attributes: ['stock'] } // Pide explícitamente el stock
+                            through: { attributes: ['stock'] }
                         },
                         {
                             association: 'sizes',
-                            through: { attributes: ['stock'] } // Pide explícitamente el stock
+                            through: { attributes: ['stock'] }
                         }
                     ]
                 }),
