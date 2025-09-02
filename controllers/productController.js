@@ -277,10 +277,10 @@ const productController = {
             }, { transaction: t });
 
             // Resetear todas las asociaciones de talles
-            await productToUpdate.setWearsizes([], { transaction: t });
-            await productToUpdate.setFootsizes([], { transaction: t });
-            await productToUpdate.setWeights([], { transaction: t });
-            await productToUpdate.setSizes([], { transaction: t });
+            await productToUpdate.setWearSizes([], { transaction: t }); // <-- CORREGIDO a 'setWearSizes'
+            await productToUpdate.setFootSizes([], { transaction: t }); // <-- CORREGIDO a 'setFootSizes'
+            await productToUpdate.setWeights([], { transaction: t });   // Este ya estaba bien
+            await productToUpdate.setSizes([], { transaction: t });     // Este ya estaba bien
 
             // Volver a crear las asociaciones con el nuevo stock
             const stockData = formData.stock || {};
@@ -298,12 +298,10 @@ const productController = {
                     for (const sizeId in sizes) {
                         const stock = parseInt(sizes[sizeId], 10);
                         if (!isNaN(stock) && stock > 0) {
-                            // ===== LA CORRECCIÓN CLAVE ESTÁ AQUÍ =====
                             await productToUpdate[addMethod](sizeId, {
-                                through: { stock: stock }, // Se añade el stock a la tabla intermedia
+                                through: { stock: stock },
                                 transaction: t
                             });
-                            // =======================================
                         }
                     }
                 }
