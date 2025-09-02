@@ -3,22 +3,15 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ProductFootSize extends Model {
     static associate(models) {
-      // define association here
+      // Define las relaciones aquí
+      ProductFootSize.belongsTo(models.Product, { foreignKey: 'product_id' });
+      ProductFootSize.belongsTo(models.FootSize, { foreignKey: 'foot_size_id' });
     }
   }
   ProductFootSize.init({
-    product_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
-    },
-    size_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
-    },
-    stock: {
-      type: DataTypes.INTEGER,
-      allowNull: false // Importante: coincide con tu base de datos
-    }
+    product_id: { type: DataTypes.INTEGER, primaryKey: true },
+    foot_size_id: { type: DataTypes.INTEGER, primaryKey: true }, // Corregido de 'size_id' a 'foot_size_id'
+    stock: { type: DataTypes.INTEGER, allowNull: false }
   }, {
     sequelize,
     modelName: 'ProductFootSize',
