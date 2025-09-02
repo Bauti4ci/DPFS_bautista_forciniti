@@ -237,40 +237,27 @@ const productController = {
         try {
             const productId = req.params.id;
             const formData = req.body;
-
             const productToUpdate = await Product.findByPk(productId);
             if (!productToUpdate) {
                 await t.rollback();
                 return res.status(404).send('Producto no encontrado');
             }
-
             const imagePath = req.file ? `/productsImages/${req.file.filename}` : productToUpdate.image_url;
-
             await productToUpdate.update({
-                name: formData.name,
-                price: Number(formData.precio),
-                description: formData.bio,
-                image_url: imagePath,
-                color: formData.color || null,
-                category_id: formData.category_id,
+                name: formData.name, price: Number(formData.precio),
+                description: formData.bio, image_url: imagePath,
+                color: formData.color || null, category_id: formData.category_id,
                 gender_id: formData.gender_id
             }, { transaction: t });
-
-            // Resetear todas las asociaciones de talles
             await productToUpdate.setWearsizes([], { transaction: t });
             await productToUpdate.setFootsizes([], { transaction: t });
             await productToUpdate.setWeights([], { transaction: t });
             await productToUpdate.setSizes([], { transaction: t });
-
-            // Volver a crear las asociaciones con el nuevo stock
             const stockData = formData.stock || {};
             const associationMap = {
-                wear: 'addWearSize',
-                foot: 'addFootSize',
-                weight: 'addWeight',
-                size: 'addSize'
+                wear: 'addWearSize', foot: 'addFootSize',
+                weight: 'addWeight', size: 'addSize'
             };
-
             for (const type in stockData) {
                 const sizes = stockData[type];
                 const addMethod = associationMap[type];
@@ -278,24 +265,20 @@ const productController = {
                     for (const sizeId in sizes) {
                         const stock = parseInt(sizes[sizeId], 10);
                         if (!isNaN(stock) && stock > 0) {
-                            // ===== LA CORRECCIÓN CLAVE ESTÁ AQUÍ =====
                             await productToUpdate[addMethod](sizeId, {
-                                through: { stock: stock }, // Se añade el stock a la tabla intermedia
+                                through: { stock: stock },
                                 transaction: t
                             });
-                            // =======================================
                         }
                     }
                 }
             }
-
             await t.commit();
             res.redirect(`/product/detail/${productId}`);
-
         } catch (error) {
             await t.rollback();
             console.error("Error al actualizar el producto:", error);
-            res.status(500).send("Ocurrió un error en el servidor.");
+            res.status(500).send("Ocurrió un error al actualizar el producto.");
         }
     },
 
