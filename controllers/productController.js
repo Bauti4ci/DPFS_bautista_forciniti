@@ -68,8 +68,8 @@ const productController = {
                 include: [
                     { association: 'category' },
                     { association: 'gender' },
-                    { association: 'wearsizes' },
-                    { association: 'footsizes' },
+                    { association: 'wearSizes' }, // <-- CORREGIDO
+                    { association: 'footSizes' }, // <-- CORREGIDO
                     { association: 'weights' },
                     { association: 'sizes' }
                 ]
