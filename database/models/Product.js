@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
             Product.belongsToMany(models.WearSize, {
                 as: 'wearsizes',
-                through: 'product_wearsizes',
+                through: models.ProductWearSize,
                 foreignKey: 'product_id',
                 otherKey: 'wear_size_id',
                 timestamps: false
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 
             Product.belongsToMany(models.FootSize, {
                 as: 'footsizes',
-                through: 'product_footsizes',
+                through: models.ProductFootSize,
                 foreignKey: 'product_id',
                 otherKey: 'foot_size_id',
                 timestamps: false
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
 
             Product.belongsToMany(models.Weight, {
                 as: 'weights',
-                through: 'product_weights',
+                through: models.ProductWeight,
                 foreignKey: 'product_id',
                 otherKey: 'weight_id',
                 timestamps: false
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
 
             Product.belongsToMany(models.Size, {
                 as: 'sizes',
-                through: 'product_sizes',
+                through: models.ProductSize, // <-- CAMBIADO: Usa el modelo, no un string
                 foreignKey: 'product_id',
                 otherKey: 'size_id',
                 timestamps: false
